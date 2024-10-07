@@ -1,0 +1,61 @@
+{
+  "products": [
+    {
+      "name": "Dominion Gloves",
+      "category": "Gloves",
+      "availability":"In Stock",
+      "image": {
+        "large": "../src/assets/cardImages/gloves_3.jpeg",
+        "small-1": "../src//assets/cardImages/gloves_1.jpeg",
+        "small-2": "../src//assets/cardImages/gloves_2.jpeg",
+        "small-3": "../src//assets/cardImages/gloves_lg.jpeg",
+        "small-4": "../src//assets/cardImages/gloves_4.jpeg"
+      },
+      "price": 49.99,
+      "rating": 4,
+      "colors": ["#003366", "#4CAF50", "#FCE7E7", "#333333"],
+      "sizes": ["XL","L","M","S","XS"],
+      "description": "Yorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.",
+      "details": ["Detail 1","Detail 2","Detail 3"],
+      "shipping": ["Shipping Detail 1","Shipping Detail 1","Shipping Detail 1"]
+    },
+    {
+        "name": "England Jersey",
+        "category": "Jerseys",
+        "availability":"In Stock",
+        "image": {
+          "large": "../src//assets/cardImages/black green lighting jersey.jpg",
+          "small-1": "",
+          "small-2": "",
+          "small-3": "",
+          "small-4": ""
+        },
+        "price": 49.99,
+        "rating": 5,
+        "colors": ["#0000"],
+        "sizes": ["XL","L","M","S","XS"],
+        "description": "",
+        "details": [],
+        "shipping": []
+      },
+      {
+        "name": "Dominion Ball",
+        "category": "Balls",
+        "availability":"In Stock",
+        "image": {
+          "large": "../src/assets/cardImages/domball.jpg",
+          "small-1": "",
+          "small-2": "",
+          "small-3": "",
+          "small-4": ""
+        },
+        "price": 49.99,
+        "rating": "",
+        "colors": [],
+        "sizes": [],
+        "description": "",
+        "details": [],
+        "shipping": []
+      }
+  ]
+}
