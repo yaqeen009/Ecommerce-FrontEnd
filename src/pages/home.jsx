@@ -10,6 +10,7 @@ import jersey from "../assets/cardImages/jerseys.png";
 import ball from "../assets/cardImages/domball.png";
 import accessory from "../assets/cardImages/footballaccessories.jpg";
 import useFetchData from "../hooks/useFetch";
+import Helmet from 'react-helmet'
 
 const Home = () => {
   const url = "/public/data.json";
@@ -19,6 +20,9 @@ const Home = () => {
   const images = [girl, gym, pitch];
   return (
     <div className="home flex flex-col flex-grow flex-shrink bg-background">
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
       <Carousel images={images} btnPath={"/shop"} btnName={"Shop Now"} />
       <Divider name={"Featured Products"} />
       <div className="flex flex-row sm:flex-col lg:mx-16 sm:mx-10 md:mx-8 md:space-x-6 lg:space-x-32 sm:space-y-4 my-6 justify-center">

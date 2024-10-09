@@ -1,7 +1,43 @@
 import CustomInput from "./customInputField";
 import google from "../assets/google.svg";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const SignUp = ({ signedUp, isOpen }) => {
+  //form schema
+  const schema = yup.object().shape({
+    username: yup
+      .string()
+      .required("Username is required")
+      .min(4, "Username must be at least 4 characters"),
+    email: yup
+      .string()
+      .required("Email is required")
+      .email("Please enter a valid email address"),
+    password: yup
+      .string()
+      .required("Password is required")
+      .min(8, "Password must be at least 8 characters"),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref("password"), null], "Passwords must match")
+      .required("Please confirm your password"),
+  });
+
+  // Initialize the form with react-hook-form and yup schema resolver
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema), //yup for validation
+  });
+
+  // Handle form submission
+  const onSubmit = (data) => {
+    console.log(data);
+  };
   return (
     <div className="sign-up flex justify-center mt-8 bg-background">
       {isOpen && (
@@ -10,19 +46,38 @@ const SignUp = ({ signedUp, isOpen }) => {
             Sign Up
           </h1>
           <div className="w-fit h-fit flex flex-col lg:py-16 md:py-12 py-8 px-4 md:px-6 lg:px-8 shadow-2dp rounded-lg bg-background">
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
               <CustomInput
                 inputName={"Enter your username"}
                 inputType={"text"}
+                register={register}
+                errors={errors}
+                validationName={"username"}
+                isRequired={true}
               />
-              <CustomInput inputName={"Enter your email"} inputType={"email"} />
+              <CustomInput
+                inputName={"Enter your email"}
+                inputType={"email"}
+                register={register}
+                errors={errors}
+                validationName={"email"}
+                isRequired={true}
+              />
               <CustomInput
                 inputName={"Enter your password"}
                 inputType={"password"}
+                register={register}
+                errors={errors}
+                validationName={"password"}
+                isRequired={true}
               />
               <CustomInput
                 inputName={"Confirm your password"}
                 inputType={"password"}
+                register={register}
+                errors={errors}
+                validationName={"confirmPassword"}
+                isRequired={true}
               />
               <button className="lg:w-[25vw] md:w-[50vw] w-[70vw] bg-accent text-background py-3 rounded-lg duration-300 ease-in hover:bg-primary font-montserrat">
                 Confirm

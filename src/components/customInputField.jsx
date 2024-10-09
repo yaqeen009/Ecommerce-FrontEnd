@@ -2,7 +2,7 @@ import { useState } from "react";
 import visible from "../assets/visible.svg";
 import invisible from "../assets/Invisible.svg";
 
-const CustomInput = ({ inputName, inputType,required }) => {
+const CustomInput = ({ inputName, inputType, register, errors, validationName, isRequired }) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const togglePasswordVisbility = (e) => {
     e.preventDefault()
@@ -19,8 +19,8 @@ const CustomInput = ({ inputName, inputType,required }) => {
               : "password"
             : inputType
         }
-        required
-        className="py-3 px-4 rounded-lg outline-none border border-secondary w-full"
+        {...register(validationName,{required: isRequired})}
+        className={`py-3 px-4 rounded-lg outline-none border  w-full ${errors[validationName] ? 'border-danger-100':'border-secondary'}`}
       />
       <label
         htmlFor="placeholder"
@@ -32,6 +32,9 @@ const CustomInput = ({ inputName, inputType,required }) => {
         <button className="absolute right-2" onClick={togglePasswordVisbility}>
           {passwordVisible ? <img src={invisible}/> : <img src={visible} />}
         </button>
+      )}
+      {errors[validationName] && (
+        <p className="absolute lg:left-4 left-3 font-open_sans lg:text-label md:text-tablet-label text-mobile-label lg:-top-3 -top-2 bg-background text-danger-100 px-2">{errors[validationName]?.message}</p>
       )}
     </span>
   );
