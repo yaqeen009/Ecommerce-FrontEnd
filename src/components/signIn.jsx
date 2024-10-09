@@ -1,33 +1,15 @@
 import CustomInput from "./customInputField";
 import google from "../assets/google.svg";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 
 const SignIn = ({ signedIn, isopen }) => {
-  //form schema
-  // const schema = yup.object().shape({
-  //   username: yup
-  //     .string()
-  //     .required("Username is required")
-  //     .min(4, "Must be at least 4 characters"),
-  //   email: yup
-  //     .string()
-  //     .required("Email is required")
-  //     .email("Must be a valid email"),
-  //   password: yup
-  //     .string()
-  //     .required("Password is required")
-  //     .min(8, "Password must be at least 6 characters"),
-  // });
+  
     // Initialize the form with react-hook-form and yup schema resolver
     const {
       register,
       handleSubmit,
       formState: { errors },
-    } = useForm({
-      // resolver: yupResolver(schema), //yup for validation
-    });
+    } = useForm();
 
     // Handle form submission
     const onSubmit = (data) => {
