@@ -9,10 +9,15 @@ import search from "../assets/search.svg";
 import burger from "../assets/burger.svg";
 import logo2 from "../assets/logo2.png";
 import close from "../assets/cancel.svg";
+import { useSelector } from "react-redux";
 
 const NavBar = () => {
+  //manage local states
   const [isClicked, setIsCliked] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
+
+  //manage global state
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   const handleClick = () => {
     setIsCliked(!isClicked);
@@ -102,8 +107,8 @@ const NavBar = () => {
               onClick={handleClick}
             />
           </span>
-          <Link to={"/account"} className="flex items-center space-x-2">
-            <p className="text-primary text-label">Login</p>
+          <Link to={isAuthenticated ? "/account":"/login"} className="flex items-center space-x-2">
+            {isAuthenticated ? (<p className="text-primary text-label">Account</p>):(<p className="text-primary text-label">Login</p>)}
             <img src={user} className="w-4 h-4" />
           </Link>
           <Link to={"/cart"} className="flex items-center space-x-2">
