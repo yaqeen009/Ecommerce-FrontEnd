@@ -3,8 +3,19 @@ import google from "../assets/google.svg";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import {useDispatch, useSelector} from 'react-redux'
+import { signUp } from "../states/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = ({ signedUp, isOpen }) => {
+  const navigate = useNavigate()
+  //redux connection
+  const dispatch = useDispatch()
+  const {isAuthenticated, user, error} = useSelector((state) => state.auth)
+  //redirect after auth
+  if (isAuthenticated) {
+    navigate('/')
+  }
   //form schema
   const schema = yup.object().shape({
     username: yup
@@ -36,7 +47,10 @@ const SignUp = ({ signedUp, isOpen }) => {
 
   // Handle form submission
   const onSubmit = (data) => {
-    console.log(data);
+    const {username, email, password} = data
+    dispatch(signUp({username, email, password}))
+    console.log(user);
+    
   };
   return (
     <div className="sign-up flex justify-center mt-8 bg-background">
@@ -79,7 +93,7 @@ const SignUp = ({ signedUp, isOpen }) => {
                 validationName={"confirmPassword"}
                 isRequired={true}
               />
-              <button className="lg:w-[25vw] md:w-[50vw] w-[70vw] bg-accent text-background py-3 rounded-lg duration-300 ease-in hover:bg-primary font-montserrat">
+              <button type="submit" className="lg:w-[25vw] md:w-[50vw] w-[70vw] bg-accent text-background py-3 rounded-lg duration-300 ease-in hover:bg-primary font-montserrat">
                 Confirm
               </button>
             </form>
@@ -100,6 +114,7 @@ const SignUp = ({ signedUp, isOpen }) => {
           </div>
         </div>
       )}
+      {error && <h1>{error}</h1>}
     </div>
   );
 };
