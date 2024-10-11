@@ -2,7 +2,7 @@ import ButtonComp from "./button";
 import cart from "../assets/cart.svg";
 
 
-const Card = ({ data, loading, error, image, name , price }) => {
+const Card = ({ data, loading, error, image, name , price, imgClick }) => {
   if (loading) {
     return (
       <div className="card flex flex-col flex-grow w-fit h-fit rounded-lg"></div>
@@ -17,7 +17,8 @@ const Card = ({ data, loading, error, image, name , price }) => {
         <>
           <img
             src={image}
-            className="rounded-lg w-[100%] h-[40vh] md:h-[20vh]  hover:opacity-70 duration-300 ease-in-out object-cover"
+            className="rounded-lg w-[100%] h-[40vh] md:h-[20vh] cursor-pointer hover:opacity-70 duration-300 ease-in-out object-cover"
+            onClick={imgClick}
           />
           <div className="flex flex-row mt-4 w-full justify-between">
             <span className="text-font flex flex-col ml-4">

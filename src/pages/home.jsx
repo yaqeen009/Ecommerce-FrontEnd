@@ -11,13 +11,22 @@ import ball from "../assets/cardImages/domball.png";
 import accessory from "../assets/cardImages/footballaccessories.jpg";
 import useFetchData from "../hooks/useFetch";
 import Helmet from 'react-helmet'
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const url = "/public/data.json";
+  const navigate = useNavigate()
+  
+  const url = "/public/data.json";                    //card data fetch 
   const { data, loading, error } = useFetchData(url);
-
   const cardData = data?.products?.featured || [];
+  
+  //slider images
   const images = [girl, gym, pitch];
+
+  const handleProdClick = (productId) => {
+    //go to product page
+    navigate(`/product/${productId}`)
+  }
   return (
     <div className="home flex flex-col flex-grow flex-shrink bg-background">
       <Helmet>
@@ -37,6 +46,7 @@ const Home = () => {
                 image={item.image.large}
                 name={item.name}
                 price={item.price}
+                imgClick={() => handleProdClick(index)}
               />
             </div>
           );
