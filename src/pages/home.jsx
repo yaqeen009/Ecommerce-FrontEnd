@@ -16,7 +16,7 @@ const Home = () => {
   const url = "/public/data.json";
   const { data, loading, error } = useFetchData(url);
 
-  const cardData = data?.products || [];
+  const cardData = data?.products?.featured || [];
   const images = [girl, gym, pitch];
   return (
     <div className="home flex flex-col flex-grow flex-shrink bg-background">
@@ -25,7 +25,7 @@ const Home = () => {
       </Helmet>
       <Carousel images={images} btnPath={"/shop"} btnName={"Shop Now"} />
       <Divider name={"Featured Products"} />
-      <div className="flex flex-row sm:flex-col lg:mx-16 sm:mx-10 md:mx-8 md:space-x-6 lg:space-x-32 sm:space-y-4 my-6 justify-center">
+      <div className="flex flex-row sm:flex-col lg:mx-16 sm:mx-4 md:mx-8 md:space-x-6 lg:space-x-32 sm:space-y-4 my-6 justify-center">
         {cardData.map((item, index) => {
           return (
             <div className="basis-1/3 justify-center flex">
@@ -43,12 +43,12 @@ const Home = () => {
         })}
       </div>
       <Divider name={"Shop by Category"} />
-      <div className="flex flex-row sm:flex-col lg:mx-20 sm:mx-10 md:mx-8 md:space-x-6 lg:space-x-10 sm:space-y-4 my-6 mb-12 items-center">
-        <Category image={boots} name={"Boots"} />
-        <Category image={jersey} name={"Jerseys"} />
-        <Category image={ball} name={"Balls"} />
-        <Category image={accessory} name={"Accessories"} />
-      </div>
+      <div className="flex flex-row sm:flex-col basis-1/4 my-6 mb-12 items-center lg:mx-16 sm:mx-4 md:mx-8">
+          <Category image={boots} name={"Boots"} />
+          <Category image={jersey} name={"Jerseys"} />
+          <Category image={ball} name={"Balls"} />
+          <Category image={accessory} name={"Accessories"} />
+        </div>
     </div>
   );
 };

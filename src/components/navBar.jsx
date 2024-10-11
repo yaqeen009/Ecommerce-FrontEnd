@@ -36,7 +36,7 @@ const NavBar = () => {
           </span>
           {/* drawer component */}
           <div
-            className={`fixed top-0 left-0 h-full bg-background shadow-3dp z-40 transition-transform transform ${
+            className={`fixed top-0 left-0 h-full bg-background  shadow-3dp z-40 transition-transform transform ${
               isExpanded ? "-translate-x-0" : "-translate-x-full"
             } w-4/5 max-w-xs`}
           >
@@ -58,7 +58,7 @@ const NavBar = () => {
             </div>
           </div>
           {/* drawer component end*/}
-          <Link to={"/"} className="">
+          <Link to={"/"} className={`${isExpanded ? `hidden` : `flex`}`}>
             <img src={logo2} className="lg:hidden flex-1 flex " />
           </Link>
           <div className="flex flex-row items-center space-x-4">
@@ -107,8 +107,15 @@ const NavBar = () => {
               onClick={handleClick}
             />
           </span>
-          <Link to={isAuthenticated ? "/account":"/login"} className="flex items-center space-x-2">
-            {isAuthenticated ? (<p className="text-primary text-label">Account</p>):(<p className="text-primary text-label">Login</p>)}
+          <Link
+            to={isAuthenticated ? "/account" : "/login"}
+            className="flex items-center space-x-2"
+          >
+            {isAuthenticated ? (
+              <p className="text-primary text-label">Account</p>
+            ) : (
+              <p className="text-primary text-label">Login</p>
+            )}
             <img src={user} className="w-4 h-4" />
           </Link>
           <Link to={"/cart"} className="flex items-center space-x-2">
