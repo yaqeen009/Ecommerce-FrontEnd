@@ -8,21 +8,21 @@
         "availability": "In Stock",
         "image": {
           "large": "../src/assets/cardImages/gloves_3.jpeg",
-          "small-1": "../src//assets/cardImages/gloves_1.jpeg",
-          "small-2": "../src//assets/cardImages/gloves_2.jpeg",
-          "small-3": "../src//assets/cardImages/gloves_lg.jpeg",
-          "small-4": "../src//assets/cardImages/gloves_4.jpeg"
+          "small1": "../src//assets/cardImages/gloves_1.jpeg",
+          "small2": "../src//assets/cardImages/gloves_2.jpeg",
+          "small3": "../src//assets/cardImages/gloves_lg.jpeg",
+          "small4": "../src//assets/cardImages/gloves_4.jpeg"
         },
         "price": 49.99,
         "rating": 4,
         "colors": ["#003366", "#4CAF50", "#FCE7E7", "#333333"],
         "sizes": ["XL", "L", "M", "S", "XS"],
         "description": "Yorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.",
-        "details": ["Detail 1", "Detail 2", "Detail 3"],
+        "details": ["Corem ipsum dolor sit amet, consectetur adipiscing elit.", "Corem ipsum dolor sit amet, consectetur adipiscing elit.", "Corem ipsum dolor sit amet, consectetur adipiscing elit."],
         "shipping": [
-          "Shipping Detail 1",
-          "Shipping Detail 1",
-          "Shipping Detail 1"
+          "Corem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "Corem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "Corem ipsum dolor sit amet, consectetur adipiscing elit."
         ]
       },
       {
