@@ -60,8 +60,8 @@ module.exports = {
       },
       screens:{
         'sm':{'max': '640px'},
-        'md':{'min':'641px','max': '1023px'},
-        'lg':{'min':'1024px'}
+        'md':{'min':'641px','max': '1024px'},
+        'lg':{'min':'1025px'}
       },
     },
   },

@@ -19,10 +19,10 @@ const NavComp = ({ name, path, expand }) => {
       className="mt-4"
         onClick={handleClick && expand}
       >
-        <p className={`font-open_sans text-mobile-body md:text-tablet-body lg:text-body  px-2 text-font duration-150 ease-in-out ${
+        <p className={`font-open_sans text-mobile-body md:text-tablet-body  mx-2 lg:text-body text-font duration-300 ease-in-out ${
           isClicked
-            ? `border-b-2 lg:border-success-100 border-background`
-            : `border-b-2 lg:border-white lg:hover:border-accent border-background hover:border-background`
+            ? `border-b-2  px-2 lg:border-success-100 border-background`
+            : `border-b-2  px-0 hover:px-2 lg:border-white lg:hover:border-accent border-background hover:border-background`
         }`}>{name}</p>
       </span>
     </Link>

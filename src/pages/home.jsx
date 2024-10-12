@@ -25,7 +25,7 @@ const Home = () => {
 
   const handleProdClick = (productId) => {
     //go to product page
-    navigate(`/product/${productId}`)
+    navigate(`/product/${productId + 1}`)
   }
   return (
     <div className="home flex flex-col flex-grow flex-shrink bg-background">

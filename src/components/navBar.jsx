@@ -72,7 +72,7 @@ const NavBar = () => {
         </div>
         <span className="flex flex-row items-center space-x-2 self-end my-2 md:w-[50vw] w-full justify-end px-4 py-1 border-2 rounded-lg">
           <input
-            className="outline-none lg:placeholder:text-body lg:text-body md:placeholder:text-tablet-body md:text-tablet-body placeholder:text-mobile-body text-mobile-body w-full"
+            className="outline-none lg:placeholder:text-label lg:text-label md:placeholder:text-tablet-label md:text-tablet-label placeholder:text-mobile-label text-mobile-label w-full"
             placeholder="Search for something here..."
           />
           <img src={search} className="w-4 h-4" />

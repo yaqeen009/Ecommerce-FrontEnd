@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useFetchData from "../hooks/useFetch";
 
 //icons
@@ -7,11 +7,14 @@ import starFilled from "../assets/star-filled.svg";
 import starUnfilled from "../assets/star-outline.svg";
 import { useState } from "react";
 import ButtonComp from "../components/button";
+import Card from "../components/card";
 
 const Product = () => {
   //states
   const [colorState, setColorState] = useState(null);
   const [sizeState, setSizeState] = useState(null);
+
+  const navigate = useNavigate();
 
   //set color state
   const colorClicked = (color) => {
@@ -22,6 +25,11 @@ const Product = () => {
     setSizeState(size);
   };
 
+  const handleProdClick = (productId) => {
+    //go to product page
+    navigate(`/product/${productId + 1}`);
+  };
+
   //fetch product data from database
   const { productId } = useParams();
   const url = "/public/data.json";
@@ -30,6 +38,7 @@ const Product = () => {
   const productData = data?.products?.featured?.find(
     (item) => item.id === Number(productId)
   );
+  const similarProdData = data?.products?.featured || [];
 
   if (loading) {
     return <p>Loading please wait...</p>;
@@ -56,38 +65,43 @@ const Product = () => {
   };
 
   return (
-    <div className="product mx-8">
-      <div className="flex flex-row basis-1/3 space-x-8 lg:my-20 justify-center">
+    <div className="product mx-4 md:mx-6 lg:mx-8">
+      <h1 className="font-montserrat text-mobile-headline md:text-tablet-headline lg:text-headlind text-font hidden sm:flex">
+        {productData.name}
+      </h1>
+      <div className="grid grid-cols-2 gap-8 w-full h-full sm:flex sm:flex-col sm:basis-0 my-4 md:my-16 lg:mt-12 sm:justify-center">
+        <div className="col-span-1">
         <img
           src={productData.image.large}
           alt=""
-          className="w-1/3 h-full rounded-lg object-cover"
+          className="w-full h-[90%] md:h-full sm:h-[50vh] rounded-lg object-cover"
         />
-        <div className="grid grid-cols-2 gap-x-4 gap-y-4 h-1/2">
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-8 sm:gap-x-4 gap-y-8 h-1/2 md:h-full">
           <img
             src={productData.image.small1}
             alt=""
-            className="rounded-lg lg:h-[35vh] md:h-4/5 w-full object-cover"
+            className="rounded-lg h-full w-full object-cover"
           />
           <img
             src={productData.image.small2}
             alt=""
-            className="rounded-lg lg:h-[35vh] md:h-4/5 w-full object-cover"
+            className="rounded-lg h-full w-full object-cover"
           />
           <img
             src={productData.image.small3}
             alt=""
-            className="rounded-lg lg:h-[35vh] md:h-4/5 w-full object-cover"
+            className="rounded-lg h-full w-full object-cover"
           />
           <img
             src={productData.image.small4}
             alt=""
-            className="rounded-lg lg:h-[35vh] md:h-4/5 w-full object-cover"
+            className="rounded-lg h-full w-full object-cover"
           />
         </div>
       </div>
-      <div className="flex flex-row justify-between">
-        <div className="flex flex-col basis-1/3 mx-4">
+      <div className="flex flex-row sm:flex-col justify-between">
+        <div className="flex flex-col basis-1/3 mx-4 sm:mx-0">
           <div className="flex flex-row justify-between items-center">
             <h2 className="text-font font-montserrat text-headlind">
               ${productData.price}
@@ -130,12 +144,12 @@ const Product = () => {
             <p className="text-font text-mobile-title md:text-tablet-title lg:text-title">
               Available Sizes
             </p>
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-4 sm:grid-cols-5 gap-2">
               {productData.sizes.map((size, index) => {
                 return (
                   <span
                     key={index}
-                    className={`cursor-pointer w-16 h-16 rounded-lg border text-center hover:border-secondary duration-150 ${
+                    className={`cursor-pointer w-16 h-16 sm:w-12 sm:h-12 rounded-lg border text-center hover:border-secondary duration-150 ${
                       sizeState === size
                         ? `border-accent text-accent`
                         : `border-font text-font`
@@ -156,9 +170,9 @@ const Product = () => {
             btnTextColor={"text-background"}
           />
         </div>
-        <span className="w-[1px] h-[60vh] bg-secondary"></span>
-        <div className="basis-2/3 flex flex-col mx-4">
-          <h1 className="font-montserrat text-headlind text-font">
+        <span className="w-[1px] h-[60vh] sm:h-[1px] sm:w-full sm:my-4 bg-secondary"></span>
+        <div className="basis-2/3 flex flex-col mx-4 sm:mx-0">
+          <h1 className="font-montserrat text-headlind text-font sm:hidden">
             {productData.name}
           </h1>
           <p className="text-body font-open_sans text-font">
@@ -198,6 +212,27 @@ const Product = () => {
               })}
             </ul>
           </div>
+        </div>
+      </div>
+      <div className="my-8 mx-4 sm:mx-0">
+        <h1 className="font-montserrat text-font text-mobile-headline md:text-tablet-headline lg:text-headlind">
+          Customers also purchased
+        </h1>
+        <div className="similar-products grid grid-cols-4 gap-4 sm:grid-cols-1  sm:space-y-4">
+          {similarProdData.map((similar, index) => {
+            return (
+              <Card
+                key={index}
+                data={data}
+                error={error}
+                loading={loading}
+                image={similar.image.large}
+                name={similar.name}
+                price={similar.price}
+                imgClick={() => handleProdClick(index)}
+              />
+            );
+          })}
         </div>
       </div>
     </div>
