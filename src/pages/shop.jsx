@@ -8,8 +8,14 @@ import boots from "../assets/cardImages/domboots.png";
 import jersey from "../assets/cardImages/jerseys.png";
 import ball from "../assets/cardImages/domball.png";
 import accessory from "../assets/cardImages/footballaccessories.jpg";
+import { useNavigate } from "react-router-dom";
 
 const Shop = () => {
+  const navigate = useNavigate()
+
+  const handleProdClick = (productId) => {
+    navigate(`/product/${productId + 1}`)
+  }
   const url = "/public/data.json";
   const { data, loading, error } = useFetchData(url);
   const trendingData = data?.products?.trending || []; //for trending data
@@ -40,6 +46,7 @@ const Shop = () => {
                     image={item.image.large}
                     name={item.name}
                     price={item.price}
+                    imgClick={() => handleProdClick(index)}
                   />
                 </div>
               );

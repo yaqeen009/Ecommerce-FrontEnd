@@ -101,7 +101,7 @@ const Product = () => {
         </div>
       </div>
       <div className="flex flex-row sm:flex-col justify-between">
-        <div className="flex flex-col basis-1/3 mx-4 sm:mx-0">
+        <div className="flex flex-col basis-1/3 md:basis-1/2 mx-4 sm:mx-0">
           <div className="flex flex-row justify-between items-center">
             <h2 className="text-font font-montserrat text-mobile-headline md:text-tablet-headline lg:text-headlind">
               ${productData.price}
@@ -170,7 +170,7 @@ const Product = () => {
             btnTextColor={"text-background"}
           />
         </div>
-        <span className="w-[1px] h-[60vh] sm:h-[1px] sm:w-full sm:my-4 bg-secondary"></span>
+        <span className="w-[1px] h-[] md:h-[45vh] sm:h-[1px] sm:w-full sm:my-4 bg-secondary"></span>
         <div className="basis-2/3 flex flex-col mx-4 sm:mx-0">
           <h1 className="font-montserrat text-headlind text-font sm:hidden">
             {productData.name}
@@ -218,7 +218,7 @@ const Product = () => {
         <h1 className="font-montserrat text-font text-mobile-headline md:text-tablet-headline lg:text-headlind">
           Customers also purchased...
         </h1>
-        <div className="similar-products grid grid-cols-4 gap-4 sm:grid-cols-1  sm:space-y-4">
+        <div className="similar-products grid grid-cols-4 md:grid-cols-3 gap-4 sm:grid-cols-1  sm:space-y-4">
           {similarProdData.map((similar, index) => {
             return (
               <Card
