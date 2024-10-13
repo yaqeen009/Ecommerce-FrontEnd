@@ -103,7 +103,7 @@ const Product = () => {
       <div className="flex flex-row sm:flex-col justify-between">
         <div className="flex flex-col basis-1/3 mx-4 sm:mx-0">
           <div className="flex flex-row justify-between items-center">
-            <h2 className="text-font font-montserrat text-headlind">
+            <h2 className="text-font font-montserrat text-mobile-headline md:text-tablet-headline lg:text-headlind">
               ${productData.price}
             </h2>
             <span className="flex space-x-2 items-center">
@@ -123,7 +123,7 @@ const Product = () => {
             <p className="text-font text-mobile-title md:text-tablet-title lg:text-title">
               Available Colors
             </p>
-            <div className="lg:my-4 flex space-x-2 items-center">
+            <div className="my-4 flex space-x-2 items-center">
               {productData.colors.map((color, index) => {
                 return (
                   <span
@@ -144,7 +144,7 @@ const Product = () => {
             <p className="text-font text-mobile-title md:text-tablet-title lg:text-title">
               Available Sizes
             </p>
-            <div className="grid grid-cols-4 sm:grid-cols-5 gap-2">
+            <div className="my-4 grid grid-cols-4 sm:grid-cols-5 gap-2">
               {productData.sizes.map((size, index) => {
                 return (
                   <span
@@ -175,7 +175,7 @@ const Product = () => {
           <h1 className="font-montserrat text-headlind text-font sm:hidden">
             {productData.name}
           </h1>
-          <p className="text-body font-open_sans text-font">
+          <p className="text-mobile-body md:text-tablet-body lg:text-body font-open_sans text-font">
             {productData.description}
           </p>
           <div className="my-4">
@@ -184,10 +184,10 @@ const Product = () => {
               {productData.details.map((detail, index) => {
                 return (
                   <li key={index} className="flex flex-row space-x-1">
-                    <p className="font-open_sans italic text-body text-font">
+                    <p className="font-open_sans italic text-mobile-body md:text-tablet-body lg:text-body text-font">
                       {index + 1}.
                     </p>
-                    <p className="font-open_sans text-body text-font">
+                    <p className="font-open_sans text-mobile-body md:text-tablet-body lg:text-body text-font">
                       {detail}
                     </p>
                   </li>
@@ -201,10 +201,10 @@ const Product = () => {
               {productData.shipping.map((shipping, index) => {
                 return (
                   <li key={index} className="flex flex-row space-x-1">
-                    <p className="font-open_sans italic text-body text-font">
+                    <p className="font-open_sans italic text-mobile-body md:text-tablet-body lg:text-body text-font">
                       {index + 1}.
                     </p>
-                    <p className="font-open_sans text-body text-font">
+                    <p className="font-open_sans text-mobile-body md:text-tablet-body lg:text-body text-font">
                       {shipping}
                     </p>
                   </li>
@@ -216,7 +216,7 @@ const Product = () => {
       </div>
       <div className="my-8 mx-4 sm:mx-0">
         <h1 className="font-montserrat text-font text-mobile-headline md:text-tablet-headline lg:text-headlind">
-          Customers also purchased
+          Customers also purchased...
         </h1>
         <div className="similar-products grid grid-cols-4 gap-4 sm:grid-cols-1  sm:space-y-4">
           {similarProdData.map((similar, index) => {
