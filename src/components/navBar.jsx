@@ -25,6 +25,7 @@ const NavBar = () => {
   const handleExpand = () => {
     setIsExpanded(!isExpanded);
   };
+  
 
   return (
     <div className="nav-bar mt-3">
