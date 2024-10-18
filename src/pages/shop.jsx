@@ -87,6 +87,7 @@ const Shop = () => {
                   image={item.image.large}
                   name={item.name}
                   price={item.price}
+                  imgClick={() => handleProdClick(index)}
                 />
               </div>
             );

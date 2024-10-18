@@ -8,11 +8,15 @@ import starUnfilled from "../assets/star-outline.svg";
 import { useState } from "react";
 import ButtonComp from "../components/button";
 import Card from "../components/card";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../states/cartSlice";
 
 const Product = () => {
   //states
   const [colorState, setColorState] = useState(null);
   const [sizeState, setSizeState] = useState(null);
+  const {cart, totalAmount, totalPrice} = useSelector((state) => state.cart)
+  const dispatch = useDispatch()
 
   const navigate = useNavigate();
 
@@ -29,6 +33,20 @@ const Product = () => {
     //go to product page
     navigate(`/product/${productId + 1}`);
   };
+
+  //add to cart function
+  const handleAddToCart = () => {
+    if (!colorState || !sizeState) {
+      alert('Please select a color and a size before adding to cart')
+    }
+    const productToAdd = {
+      ...productData,
+      color: colorState,
+      size: sizeState,
+    }
+    dispatch(addToCart(productToAdd))
+    alert('Item added to cart successfully!')
+  }
 
   //fetch product data from database
   const { productId } = useParams();
@@ -168,6 +186,7 @@ const Product = () => {
             btnColor={"bg-accent w-full mb-4"}
             btnTextSize={"px-[40%] py-2"}
             btnTextColor={"text-background"}
+            btnFunction={handleAddToCart}
           />
         </div>
         <span className="w-[1px] h-[] md:h-[45vh] sm:h-[1px] sm:w-full sm:my-4 bg-secondary"></span>

@@ -25,7 +25,7 @@ const NavBar = () => {
   const handleExpand = () => {
     setIsExpanded(!isExpanded);
   };
-  
+
 
   return (
     <div className="nav-bar mt-3">
@@ -71,7 +71,7 @@ const NavBar = () => {
             </Link>
           </div>
         </div>
-        <span className="flex flex-row items-center space-x-2 self-end my-2 md:w-[50vw] w-full justify-end px-4 py-1 border-2 rounded-lg">
+        <span className="flex flex-row items-center space-x-2 self-end my-2 md:w-[50vw] w-full justify-end px-4 py-2 lg:py-1 border-2 rounded-lg">
           <input
             className="outline-none lg:placeholder:text-label lg:text-label md:placeholder:text-tablet-label md:text-tablet-label placeholder:text-mobile-label text-mobile-label w-full"
             placeholder="Search for something here..."
