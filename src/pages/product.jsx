@@ -5,7 +5,7 @@ import useFetchData from "../hooks/useFetch";
 import check from "../assets/stockCheck.svg";
 import starFilled from "../assets/star-filled.svg";
 import starUnfilled from "../assets/star-outline.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ButtonComp from "../components/button";
 import Card from "../components/card";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,7 +15,6 @@ const Product = () => {
   //states
   const [colorState, setColorState] = useState(null);
   const [sizeState, setSizeState] = useState(null);
-  const {cart, totalAmount, totalPrice} = useSelector((state) => state.cart)
   const dispatch = useDispatch()
 
   const navigate = useNavigate();
@@ -56,6 +55,13 @@ const Product = () => {
   const productData = data?.products?.featured?.find(
     (item) => item.id === Number(productId)
   );
+  useEffect(() => {
+    if (productData) {
+      setColorState(productData.colors[0])
+      setSizeState(productData.sizes[0])
+    }
+  },[productData])
+
   const similarProdData = data?.products?.featured || [];
 
   if (loading) {

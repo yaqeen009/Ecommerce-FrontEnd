@@ -35,6 +35,7 @@ const Card = ({ data, loading, error, image, name , price, imgClick }) => {
                 btnColor={"bg-accent border-font"}
                 btnHover={"hover:bg-primary hover:border-background"}
                 btnIconSize={"p-2"}
+                btnFunction={"handleAddToCart"}
               />
             </span>
           </div>

@@ -55,13 +55,13 @@ const CartItem = ({ id, name, color, size, image, inStock, price, amount }) => {
                 <p>{size}</p>
               </div>
               <span className="w-16 h-10 border border-secondary rounded-lg flex lg:hidden  items-center space-x-3 pl-2">
-                <button onClick={()=>handleIncrement(id)}>
+                <button onClick={()=>handleDecrement(id)}>
                   <img src={increase} alt="" className="-rotate-90" />
                 </button>
                 <p className="text-mobile-label md:text-tablet-label lg:text-label text-font text-center ">
-                  1
+                  {amount}
                 </p>
-                <button onClick={()=> handleDecrement(id)}>
+                <button onClick={()=> handleIncrement(id)}>
                   <img src={decrease} alt="" className="-rotate-90"  />
                 </button>
               </span>
