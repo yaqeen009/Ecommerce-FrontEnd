@@ -1,11 +1,14 @@
 import ButtonComp from "./button";
 import cart from "../assets/cart.svg";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../states/cartSlice";
 
 
-const Card = ({ data, loading, error, image, name , price, imgClick }) => {
+const Card = ({ data, loading, error, image, name , price, imgClick, handleAddToCart }) => {
+
   if (loading) {
     return (
-      <div className="card flex flex-col flex-grow w-fit h-fit rounded-lg"></div>
+      <div data-testid="loading-state" className="card flex flex-col flex-grow w-fit h-fit rounded-lg"></div>
     );
   }
   if (error) {
@@ -16,6 +19,7 @@ const Card = ({ data, loading, error, image, name , price, imgClick }) => {
       {data && (
         <>
           <img
+            alt="card-image"
             src={image}
             className="rounded-lg w-[100%] h-[40vh] md:h-[20vh] cursor-pointer hover:opacity-70 duration-300 ease-in-out object-cover"
             onClick={imgClick}
@@ -31,11 +35,12 @@ const Card = ({ data, loading, error, image, name , price, imgClick }) => {
             </span>
             <span className="mr-4">
               <ButtonComp
+                data-testid = "btn-comp"
                 btnIcon={cart}
                 btnColor={"bg-accent border-font"}
                 btnHover={"hover:bg-primary hover:border-background"}
                 btnIconSize={"p-2"}
-                btnFunction={"handleAddToCart"}
+                btnFunction={handleAddToCart}
               />
             </span>
           </div>

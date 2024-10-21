@@ -2,12 +2,11 @@ import { useSelector } from "react-redux";
 import ButtonComp from "../components/button";
 import CartItem from "../components/cartItem";
 import CartSummary from "../components/cartSummary";
+import { useEffect } from "react";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart.cart);
   const { totalPrice } = useSelector((state) => state.cart);
-
-  
   
   return (
     <div className="cart lg:mx-8 mx-4 lg:my-16 my-8 bg-background">

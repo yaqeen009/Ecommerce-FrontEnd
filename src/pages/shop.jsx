@@ -9,17 +9,58 @@ import jersey from "../assets/cardImages/jerseys.png";
 import ball from "../assets/cardImages/domball.png";
 import accessory from "../assets/cardImages/footballaccessories.jpg";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../states/cartSlice";
+import { useEffect, useState } from "react";
 
 const Shop = () => {
+  const [sizeState, setSizeState]= useState(null)
+  const [colorState, setColorState]= useState(null)
+
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleProdClick = (productId) => {
     navigate(`/product/${productId + 1}`)
   }
+
+  const handleAddToCart = (item) => {
+    const productToAdd = {
+      ...item,
+      color: colorState,
+      size: sizeState,
+    }
+    dispatch(addToCart(productToAdd))
+    console.log("Item added to cart");
+    
+  }
+
   const url = "/public/data.json";
   const { data, loading, error } = useFetchData(url);
   const trendingData = data?.products?.trending || []; //for trending data
   const newArrivals = data?.products?.newArrivals || []; //for new arrivals data
+
+  // set default color and size 
+useEffect(() => {
+  if (trendingData.length > 0) {
+    if (trendingData[0]?.colors?.length > 0) {
+      setColorState(trendingData[0].colors[0]);
+    }
+    if (trendingData[0]?.sizes?.length > 0) {
+      setSizeState(trendingData[0].sizes[0]);
+    }
+  }
+
+  if (newArrivals.length > 0) {
+    if (newArrivals[0]?.colors?.length > 0) {
+      setColorState(newArrivals[0].colors[0]);
+    }
+    if (newArrivals[0]?.sizes?.length > 0) {
+      setSizeState(newArrivals[0].sizes[0]);
+    }
+  }
+}, [trendingData, newArrivals]);
+
 
   const images = [gloves]; //images for carousel
   return (
@@ -47,6 +88,7 @@ const Shop = () => {
                     name={item.name}
                     price={item.price}
                     imgClick={() => handleProdClick(index)}
+                    handleAddToCart={()=>handleAddToCart(item)}
                   />
                 </div>
               );
@@ -88,6 +130,7 @@ const Shop = () => {
                   name={item.name}
                   price={item.price}
                   imgClick={() => handleProdClick(index)}
+                  handleAddToCart={()=>handleAddToCart(item)}
                 />
               </div>
             );
