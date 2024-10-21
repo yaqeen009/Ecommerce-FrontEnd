@@ -5,6 +5,7 @@ import CartSummary from "../components/cartSummary";
 import { useEffect } from "react";
 
 const Cart = () => {
+  //get redux states
   const cart = useSelector((state) => state.cart.cart);
   const { totalPrice } = useSelector((state) => state.cart);
   

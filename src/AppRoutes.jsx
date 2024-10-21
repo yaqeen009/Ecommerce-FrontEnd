@@ -8,6 +8,7 @@ import Account from "./pages/account";
 import Login from "./pages/login";
 import ErrorPage from './pages/error';
 import Product from './pages/product';
+import Categories from './pages/categories';
 
 const AppRoutes = () => {
   return (
@@ -22,6 +23,7 @@ const AppRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path='*' element={<ErrorPage/>}/>
         <Route path="/product/:productId" element={<Product/>}/>
+        <Route path='/categories/:category' element={<Categories/>}/>
       </Routes>
     </div>
   );

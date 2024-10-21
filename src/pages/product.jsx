@@ -1,40 +1,39 @@
 import { useNavigate, useParams } from "react-router-dom";
 import useFetchData from "../hooks/useFetch";
+import { useEffect, useState } from "react";
+import ButtonComp from "../components/button";
+import Card from "../components/card";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../states/cartSlice";
 
 //icons
 import check from "../assets/stockCheck.svg";
 import starFilled from "../assets/star-filled.svg";
 import starUnfilled from "../assets/star-outline.svg";
-import { useEffect, useState } from "react";
-import ButtonComp from "../components/button";
-import Card from "../components/card";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../states/cartSlice";
+
 
 const Product = () => {
-  //states
+  //states and hooks
   const [colorState, setColorState] = useState(null);
   const [sizeState, setSizeState] = useState(null);
   const dispatch = useDispatch()
-
   const navigate = useNavigate();
+  const { productId } = useParams();
+  
 
-  //set color state
+  //change color and size states
   const colorClicked = (color) => {
     setColorState(color);
   };
-  //set size state
   const sizeClicked = (size) => {
     setSizeState(size);
   };
 
+  //click functionalities
   const handleProdClick = (productId) => {
-    //go to product page
     navigate(`/product/${productId + 1}`);
   };
-
-  //add to cart function
-  const handleAddToCart = () => {
+  const handleAddToCart = () => {                                     //add to cart function
     if (!colorState || !sizeState) {
       alert('Please select a color and a size before adding to cart')
     }
@@ -48,13 +47,14 @@ const Product = () => {
   }
 
   //fetch product data from database
-  const { productId } = useParams();
   const url = "/public/data.json";
   const { data, loading, error } = useFetchData(url);
-
   const productData = data?.products?.featured?.find(
     (item) => item.id === Number(productId)
   );
+  const similarProdData = data?.products?.featured || [];
+
+  //set default color and size states
   useEffect(() => {
     if (productData) {
       setColorState(productData.colors[0])
@@ -62,8 +62,8 @@ const Product = () => {
     }
   },[productData])
 
-  const similarProdData = data?.products?.featured || [];
-
+  
+  //conditional rendering of data status
   if (loading) {
     return <p>Loading please wait...</p>;
   }
@@ -77,11 +77,9 @@ const Product = () => {
   //rating icon rendering
   const rendeStars = (rating) => {
     const stars = [];
-    //for filled stars
     for (let i = 0; i < rating; i++) {
       stars.push(<img src={starFilled} key={`filled-${i}`} />);
     }
-    //for unfilled stars
     for (let i = rating; i < 5; i++) {
       stars.push(<img src={starUnfilled} key={`unfilled-${i}`} />);
     }

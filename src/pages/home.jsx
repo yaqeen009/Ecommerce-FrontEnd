@@ -18,19 +18,22 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../states/cartSlice";
 
 const Home = () => {
+  //states and hooks
   const [sizeState, setSizeState]= useState(null)
   const [colorState, setColorState]= useState(null)
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
-
-  const url = "/public/data.json";                    //card data fetch 
-  const { data, loading, error } = useFetchData(url);
+  
+  //data fetch
+  const url = "/public/data.json"; 
+  const { data, loading, error } = useFetchData(url);                   //card data fetch 
   const cardData = data?.products?.featured || [];
   
   //slider images
   const images = [girl, gym, pitch];
 
+  //click functionalities
   const handleAddToCart = (item) => {
     const productToAdd = {
       ...item,
@@ -40,11 +43,11 @@ const Home = () => {
     dispatch(addToCart(productToAdd))
     console.log("Item added to cart");
   }
-
   const handleProdClick = (productId) => {      //go to product page
     navigate(`/product/${productId + 1}`)
   }
 
+  //default color and size states
   useEffect(() => {
     if (cardData.length > 0) {
       if (cardData[0]?.colors?.length > 0) {
