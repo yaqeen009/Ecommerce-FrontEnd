@@ -8,8 +8,8 @@ import cart from "../assets/bag.svg";
 import search from "../assets/search.svg";
 import burger from "../assets/burger.svg";
 import logo2 from "../assets/logo2.png";
-import close from "../assets/cancel.svg";
 import { useSelector } from "react-redux";
+import CancelBtn from "../assets/cancel";
 
 const NavBar = () => {
   //manage local states
@@ -36,6 +36,7 @@ const NavBar = () => {
             <img src={burger} />
           </span>
           {/* drawer component */}
+          <div class={`fixed inset-0 bg-font bg-opacity-75 transition-opacity ${!isExpanded && `hidden`}`}></div>
           <div
             className={`fixed top-0 left-0 h-full bg-background  shadow-3dp z-40 transition-transform transform ${
               isExpanded ? "-translate-x-0" : "-translate-x-full"
@@ -44,7 +45,7 @@ const NavBar = () => {
             <div className="flex flex-row justify-between mx-4 items-center mt-2">
               <img src={logo2} />
               <span onClick={handleExpand}>
-                <img src={close} />
+                <CancelBtn color={"#333333"}/>
               </span>
             </div>
             <div className="flex flex-col space-y-4 mt-4">
