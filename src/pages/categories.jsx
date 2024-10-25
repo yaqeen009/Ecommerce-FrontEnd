@@ -1,26 +1,62 @@
-import useFetchData from "../hooks/useFetch";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../states/cartSlice";
-import Card from "../components/card";
 import Drawer from "../components/filterDrawer";
 import Tag from "../components/filterTag";
-import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import useFetchData from "../hooks/useFetch";
+import Card from "../components/card";
+import Pagination from "../components/filterPages";
 
 const Categories = () => {
-  //hooks and states
-  const [filterItem, setFilterItem] = useState(null);
+  //states & hooks
+  const [sortItem, setSortItem] = useState(null);
+  const [catItem, setCatItem] = useState(null);
+  const [colorItem, setColorItem] = useState(null);
+  const [sizeItem, setSizeItem] = useState(null);
   const [sizeState, setSizeState] = useState(null);
   const [colorState, setColorState] = useState(null);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   //data fetching
   const url = "/public/data.json";
   const { data, loading, error } = useFetchData(url);
-  const productData = data?.products?.trending || [];
+  const trendingData = data?.products?.trending || []; //for trending data
+
+  // set default color and size
+  useEffect(() => {
+    if (trendingData.length > 0) {
+      if (trendingData[0]?.colors?.length > 0) {
+        setColorState(trendingData[0].colors[0]);
+      }
+      if (trendingData[0]?.sizes?.length > 0) {
+        setSizeState(trendingData[0].sizes[0]);
+      }
+    }
+  }, [trendingData]);
 
   //click functionalities
+  const deleteSort = () => {
+    if (sortItem) {
+      setSortItem(!sortItem);
+    }
+  };
+  const deleteCat = () => {
+    if (catItem) {
+      setCatItem(!catItem);
+    }
+  };
+  const deleteColor = () => {
+    if (colorItem) {
+      setColorItem(!colorItem);
+    }
+  };
+  const deleteSize = () => {
+    if (sizeItem) {
+      setSizeItem(!sizeItem);
+    }
+  };
   const handleProdClick = (productId) => {
     navigate(`/product/${productId + 1}`);
   };
@@ -33,92 +69,67 @@ const Categories = () => {
     dispatch(addToCart(productToAdd));
     console.log("Item added to cart");
   };
-  const handleItemClick = (item) => {
-    setFilterItem(item);
+
+  //objects
+  const filters = {
+    sort: [
+      "New Arrivals",
+      "Trending",
+      "Alphabetical (A ~ Z)",
+      "Alphabetical (Z ~ A)",
+      "Old-to-New",
+      "New-to-Old",
+      "Most Expensive",
+      "Least Expensive",
+    ],
+    categories: ["Boots", "Jerseys", "Balls", "Accessories"],
+    colors: ["Black", "White", "Red", "Blue", "Yellow", "Green"],
+    sizes: ["XXL", "XL", "L", "M", "S", "XS", "XXS"],
   };
-  //filters
-  const sortByFilters = [
-    "New Arrivals",
-    "Trending",
-    "Alphabetical (A ~ Z)",
-    "Alphabetical (Z ~ A)",
-    "Old-to-New",
-    "New-to-Old",
-    "Most Expensive",
-    "Least Expensive",
-  ];
-  const categoriesFilters = ["Boots", "Jerseys", "Balls", "Accessories"];
-  const colorFilters = ["Black", "White", "Red", "Blue", "Yellow", "Green"];
-  const sizeFilters = ["XXL", "XL", "L", "M", "S", "XS", "XXS"];
-
-  useEffect(() => {
-    if (productData.length > 0) {
-      if (productData[0]?.colors?.length > 0) {
-        setColorState(productData[0].colors[0]);
-      }
-      if (productData[0]?.sizes?.length > 0) {
-        setSizeState(productData[0].sizes[0]);
-      }
-    }
-  }, [productData]);
-
-  if (!productData || error) {
-    return (
-      <h1 className="font-montserrat text-mobile-headline md:text-tablet-headline lg:text-headlind text-font">
-        Category not found!
-      </h1>
-    );
-  }
-  if (loading) {
-    return <p>Loading, please wait...</p>;
-  }
 
   return (
-    productData && (
-      <div className="categories">
-        <div className="mx-4 lg:mx-8 lg:mb-4">
-          <h1 className="font-montserrat text-font text-mobile-headline md:text-tablet-headline lg:text-headlind">
-            New Arrivals
-          </h1>
-          <div className="flex flex-row justify-between">
-            <Drawer
-              filters={sortByFilters}
-              name={"Sort By"}
-              handleItemClick={handleItemClick}
-            />
-            <div className="flex flex-row space-x-2">
-              <Drawer
-                filters={categoriesFilters}
-                name={"Categories"}
-                handleItemClick={handleItemClick}
-              />
-              <p>|</p>
-              <Drawer
-                filters={colorFilters}
-                name={"Colors"}
-                handleItemClick={handleItemClick}
-              />
-              <p>|</p>
-              <Drawer
-                filters={sizeFilters}
-                name={"Sizes"}
-                handleItemClick={handleItemClick}
-              />
-            </div>
-          </div>
+    <div className="categories mx-4 lg:mx-8 lg:mt-16">
+      <h1 className="font-montserrat text-font text-mobile-headline md:text-tablet-headline lg:text-headlind">
+        New Arrivals
+      </h1>
+      <div className="flex flex-row justify-between">
+        <Drawer
+          name={"Sort by"}
+          filters={filters.sort}
+          setFilterItem={setSortItem}
+        />
+        <div className="flex flex-row space-x-4">
+          <Drawer
+            name={"Categories"}
+            filters={filters.categories}
+            setFilterItem={setCatItem}
+          />
+          <Drawer
+            name={"Colors"}
+            filters={filters.colors}
+            setFilterItem={setColorItem}
+          />
+          <Drawer
+            name={"Sizes"}
+            filters={filters.sizes}
+            setFilterItem={setSizeItem}
+          />
         </div>
-        <div className="bg-[#B0B0B020] w-[100%]">
-          <div className="flex items-center space-x-2 py-3 mx-4 lg:mx-8">
-            <p className="font-montserrat text-secondary text-mobile-body md:text-tablet-body lg:text-body mr-4">
-              Filters |
-            </p>
-            <div className="flex flex-row space-x-2">
-              {filterItem ? <Tag tagName={filterItem} /> : <p></p>}
-            </div>
-          </div>
+      </div>
+      <div className="w-[100vw] h-fit py-2 bg-[#B0B0B020] lg:-mx-8 flex flex-row space-x-4 items-center">
+        <p className="font-open_sans text-secondary text-mobile-body md:text-tablet-body lg:text-body ml-8">
+          Filters
+        </p>
+        <span className="w-[1px] h-8 bg-font"></span>
+        <div className="flex flex-row space-x-3 items-center">
+          {sortItem && <Tag name={sortItem} btnFunction={deleteSort} />}
+          {catItem && <Tag name={catItem} btnFunction={deleteCat} />}
+          {colorItem && <Tag name={colorItem} btnFunction={deleteColor} />}
+          {sizeItem && <Tag name={sizeItem} btnFunction={deleteSize} />}
         </div>
-        <div className="grid grid-cols-3 sm:grid-cols-1 content-center lg:mx-8 mx-4 lg:my-5">
-          {productData.map((item, index) => {
+      </div>
+        <div className="grid grid-cols-3 sm:grid-cols-1 content-center lg:-mx-8 -mx-4 my-5">
+          {trendingData.map((item, index) => {
             return (
               <div className="lg:mx-8 mx-4 my-4">
                 <Card
@@ -136,9 +147,16 @@ const Categories = () => {
             );
           })}
         </div>
-        <p className="text-center">1 2 3 ... 4 5 6</p>
-      </div>
-    )
+        <div className="pagination flex flex-row justify-center mb-4 items-baseline space-x-4">
+          <Pagination page={1}/>
+          <Pagination page={2}/>
+          <Pagination page={3}/>
+          <p>...</p>
+          <Pagination page={8}/>
+          <Pagination page={9}/>
+          <Pagination page={10}/>
+        </div>
+    </div>
   );
 };
 
