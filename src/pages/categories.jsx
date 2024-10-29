@@ -1,23 +1,27 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Drawer from "../components/filterDrawer";
 import Tag from "../components/filterTag";
 import { useNavigate } from "react-router-dom";
 import useFetchData from "../hooks/useFetch";
 import Card from "../components/card";
 import Pagination from "../components/filterPages";
+import { filterProducts, removeFilter } from "../states/categoriesSlice";
 
 const Categories = () => {
   //states & hooks
-  const [sortItem, setSortItem] = useState(null);
-  const [catItem, setCatItem] = useState(null);
-  const [colorItem, setColorItem] = useState(null);
-  const [sizeItem, setSizeItem] = useState(null);
   const [sizeState, setSizeState] = useState(null);
   const [colorState, setColorState] = useState(null);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  //selectors
+  const sortItem = useSelector((state) => state.filter.filters.sort)
+  const categoryItem = useSelector((state) => state.filter.filters.category)
+  const colorItem = useSelector((state) => state.filter.filters.color)
+  const sizeItem = useSelector((state) => state.filter.filters.size)
+  const filteredProducts = useSelector((state) => state.filter.filteredProducts)
 
   //data fetching
   const url = "/public/data.json";
@@ -38,25 +42,18 @@ const Categories = () => {
 
   //click functionalities
   const deleteSort = () => {
-    if (sortItem) {
-      setSortItem(!sortItem);
-    }
+      dispatch(removeFilter('sort'))
   };
   const deleteCat = () => {
-    if (catItem) {
-      setCatItem(!catItem);
-    }
+    dispatch(removeFilter('category'))
   };
   const deleteColor = () => {
-    if (colorItem) {
-      setColorItem(!colorItem);
-    }
+    dispatch(removeFilter('color'))
   };
   const deleteSize = () => {
-    if (sizeItem) {
-      setSizeItem(!sizeItem);
-    }
+    dispatch(removeFilter('size'))
   };
+
   const handleProdClick = (productId) => {
     navigate(`/product/${productId + 1}`);
   };
@@ -87,6 +84,7 @@ const Categories = () => {
     sizes: ["XXL", "XL", "L", "M", "S", "XS", "XXS"],
   };
 
+  const isFilterActive = sortItem || categoryItem || colorItem || sizeItem
   return (
     <div className="categories mx-4 lg:mx-8 lg:mt-16">
       <h1 className="font-montserrat text-font text-mobile-headline md:text-tablet-headline lg:text-headlind">
@@ -96,23 +94,23 @@ const Categories = () => {
         <Drawer
           name={"Sort by"}
           filters={filters.sort}
-          setFilterItem={setSortItem}
+          setFilterItem={(item) => dispatch(filterProducts({filterType:"sort", value:item}))}
         />
         <div className="flex flex-row space-x-4">
           <Drawer
             name={"Categories"}
             filters={filters.categories}
-            setFilterItem={setCatItem}
+            setFilterItem={(item) => dispatch(filterProducts({filterType:"category", value:item}))}
           />
           <Drawer
             name={"Colors"}
             filters={filters.colors}
-            setFilterItem={setColorItem}
+            setFilterItem={(item) => dispatch(filterProducts({filterType:"color", value:item}))}
           />
           <Drawer
             name={"Sizes"}
             filters={filters.sizes}
-            setFilterItem={setSizeItem}
+            setFilterItem={(item) => dispatch(filterProducts({filterType:"size", value:item}))}
           />
         </div>
       </div>
@@ -123,17 +121,16 @@ const Categories = () => {
         <span className="w-[1px] h-8 bg-font"></span>
         <div className="flex flex-row space-x-3 items-center">
           {sortItem && <Tag name={sortItem} btnFunction={deleteSort} />}
-          {catItem && <Tag name={catItem} btnFunction={deleteCat} />}
+          {categoryItem && <Tag name={categoryItem} btnFunction={deleteCat} />}
           {colorItem && <Tag name={colorItem} btnFunction={deleteColor} />}
           {sizeItem && <Tag name={sizeItem} btnFunction={deleteSize} />}
         </div>
       </div>
         <div className="grid grid-cols-3 sm:grid-cols-1 content-center lg:-mx-8 -mx-4 my-5">
-          {trendingData.map((item, index) => {
+          {(isFilterActive ? filteredProducts: trendingData).map((item, index) => {
             return (
-              <div className="lg:mx-8 mx-4 my-4">
+              <div key={index} className="lg:mx-8 mx-4 my-4">
                 <Card
-                  key={index}
                   loading={loading}
                   error={error}
                   data={data}

@@ -10,7 +10,7 @@ const Pagination = ({page}) => {
   };
   return (
     <div
-      className={`filter-pagination w-fit h-fit border rounded-lg ${
+      className={`filter-pagination w-fit h-fit border rounded-lg hover:bg-[#B0B0B020] ${
         isActive ? `border-accent` : `border-secondary`
       }`}
       onClick={handleClick}

@@ -25,6 +25,12 @@ module.exports = {
           "300":"#014B8F",
           "400":"#627F9A",
           "500":"#F0F5FD",
+        },
+        items:{
+          'black':'#333333',
+          'beige':'#FCE7E7',
+          'blue':'#003366',
+          'green':'#4CAF50'
         }
       },
       boxShadow:{       //elevation and shadows

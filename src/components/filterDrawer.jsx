@@ -45,6 +45,3 @@ const Drawer = ({ name, filters,setFilterItem }) => {
 };
 
 export default Drawer;
-{
-  /* */
-}
