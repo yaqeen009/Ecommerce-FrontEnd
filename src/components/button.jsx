@@ -8,12 +8,16 @@ const ButtonComp = ({
   btnIconSize,
   btnTextSize,
   btnBorder,
+  btnType,
+  btnDisabled,
 }) => {
   return (
     <div className="btn-comp">
       <button
         className={`${btnColor} ${btnHover} ${btnBorder} ${btnTextColor} rounded-lg p-2 flex flex-row shadow-1dp duration-300 ease-in-out`}
         onClick={btnFunction}
+        type={btnType}
+        disabled={btnDisabled}
       >
         <p
           className={`text-mobile-label md:text-tablet-label lg:text-label ${btnTextSize} `}

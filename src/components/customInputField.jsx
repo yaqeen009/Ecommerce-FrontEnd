@@ -3,7 +3,10 @@ import visible from "../assets/visible.svg";
 import invisible from "../assets/Invisible.svg";
 
 const CustomInput = ({ inputName, inputType, register, errors, validationName, isRequired }) => {
+  //states
   const [passwordVisible, setPasswordVisible] = useState(false);
+  
+  //functionalities
   const togglePasswordVisbility = (e) => {
     e.preventDefault()
     setPasswordVisible(!passwordVisible);
