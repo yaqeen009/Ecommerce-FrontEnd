@@ -5,17 +5,19 @@ import AppRoutes from "./AppRoutes";
 
 function App() {
   const location = useLocation();
-  const hideHeaderFooterRoutes = ["/login"];
-  const showHeaderFooter =
-    !hideHeaderFooterRoutes.includes(location.pathname) &&
+  const hideFooterRoutes = ["/login"];
+  const hideHeaderRoutes = ["/checkout","/login"]
+  const showHeader = !hideHeaderRoutes.includes(location.pathname) && location.pathname !== '*'
+  const showFooter =
+    !hideFooterRoutes.includes(location.pathname) &&
     location.pathname !== '*';
   return (
     <div className="bg-background">
-      {showHeaderFooter && <NavBar />}
+      {showHeader && <NavBar />}
       <div>
         <AppRoutes />
       </div>
-      {showHeaderFooter && <Footer />}
+      {showFooter && <Footer />}
     </div>
   );
 }

@@ -30,11 +30,11 @@ const CartItem = ({ id, name, color, size, image, inStock, price, amount }) => {
   return (
     <div className="cart-item border-t-[1px] py-6 flex flex-row space-x-4 w-full justify-between h-[40hv]">
       <div className="basis-4/5 flex flex-row space-x-4">
-        <div className="basis-1/2">
+        <div className="basis-1/3">
           <img
             src={image}
             alt="prod-img"
-            className="object-cover rounded-xl w-full h-full"
+            className="object-cover rounded-xl w-64 h-64"
           />
         </div>
         <div className="flex flex-col basis-1/2 justify-between">

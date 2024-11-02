@@ -10,17 +10,18 @@ const ButtonComp = ({
   btnBorder,
   btnType,
   btnDisabled,
+  btnWidth
 }) => {
   return (
     <div className="btn-comp">
       <button
-        className={`${btnColor} ${btnHover} ${btnBorder} ${btnTextColor} rounded-lg p-2 flex flex-row shadow-1dp duration-300 ease-in-out`}
+        className={`${btnColor} ${btnHover} ${btnBorder} ${btnTextColor} ${btnWidth} rounded-lg p-2 flex flex-row shadow-1dp duration-300 ease-in-out`}
         onClick={btnFunction}
         type={btnType}
         disabled={btnDisabled}
       >
         <p
-          className={`text-mobile-label md:text-tablet-label lg:text-label ${btnTextSize} `}
+          className={`text-mobile-label md:text-tablet-label lg:text-label text-center ${btnTextSize} `}
         >
           {btnName}
         </p>

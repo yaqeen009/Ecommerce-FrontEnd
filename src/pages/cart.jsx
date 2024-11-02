@@ -3,14 +3,25 @@ import ButtonComp from "../components/button";
 import CartItem from "../components/cartItem";
 import CartSummary from "../components/cartSummary";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 const Cart = () => {
+  //states and hooks
+  const navigate = useNavigate();
   //get redux states
   const cart = useSelector((state) => state.cart.cart);
   const { totalPrice } = useSelector((state) => state.cart);
-  
+
+  //functionalities
+  const goToCheckout = () => {
+      navigate("/checkout");
+  };
+  const goToShopping = () => {
+    navigate("/shop");
+  };
   return (
-    <div className="cart lg:mx-8 mx-4 lg:my-16 my-8 bg-background">
+    <div className="cart lg:mx-8 mx-4 lg:my-16 my-8 bg-background h-full">
       <h1 className="font-montserrat text-mobile-headline md:text-tablet-headline lg:text-headlind">
         Shopping Cart
       </h1>
@@ -21,7 +32,7 @@ const Cart = () => {
               return (
                 <CartItem
                   key={`${item.id}-${item.size}-${item.color}`}
-                  id = {item.id}
+                  id={item.id}
                   name={item.name}
                   color={item.color}
                   size={item.size}
@@ -36,28 +47,32 @@ const Cart = () => {
             <p>Cart is Empty</p>
           )}
         </div>
-        <div className="flex flex-col w-1/3 md:w-1/2 sm:w-full space-y-4">
-          <CartSummary
-            subtotal={totalPrice}
-            delivery={5.0}
-            tax={7.49}
-            promo={10.0}
-            orderTotal={Math.floor(totalPrice + 5.0 + 7.49 - 10.0)}
-          />
-          <ButtonComp
-            btnName={"Proceed to Checkout"}
-            btnColor={"bg-accent w-full justify-center"}
-            btnHover={"hover:bg-primary"}
-            btnTextColor={"text-background"}
-            btnTextSize={"py-2"}
-          />
-          <span className="self-center">
-            <ButtonComp
-              btnName={"Or continue shoppping"}
-              btnTextColor={"text-primary hover:text-accent"}
+        {cart.length > 0 && (
+          <div className="flex flex-col w-1/3 md:w-1/2 sm:w-full space-y-4">
+            <CartSummary
+              subtotal={totalPrice}
+              delivery={5.0}
+              tax={7.49}
+              promo={10.0}
+              orderTotal={Math.floor(totalPrice + 5.0 + 7.49 - 10.0)}
             />
-          </span>
-        </div>
+            <ButtonComp
+              btnName={"Proceed to Checkout"}
+              btnColor={"bg-accent w-full justify-center"}
+              btnHover={"hover:bg-primary"}
+              btnTextColor={"text-background"}
+              btnTextSize={"py-2"}
+              btnFunction={goToCheckout}
+            />
+            <span className="self-center">
+              <ButtonComp
+                btnName={"Or continue shoppping"}
+                btnTextColor={"text-primary hover:text-accent"}
+                btnFunction={goToShopping}
+              />
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

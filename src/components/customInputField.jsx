@@ -2,7 +2,7 @@ import { useState } from "react";
 import visible from "../assets/visible.svg";
 import invisible from "../assets/Invisible.svg";
 
-const CustomInput = ({ inputName, inputType, register, errors, validationName, isRequired }) => {
+const CustomInput = ({ inputName, inputType, register, errors, validationName, isRequired, checkout }) => {
   //states
   const [passwordVisible, setPasswordVisible] = useState(false);
   
@@ -13,7 +13,7 @@ const CustomInput = ({ inputName, inputType, register, errors, validationName, i
   };
 
   return (
-    <span className="relative flex items-center lg:w-[25vw] md:w-[50vw] w-[70vw] my-2">
+    <span className={`relative flex items-center  my-2 ${checkout ? `w-full`:`lg:w-[25vw] md:w-[50vw] w-[70vw]`}`}>
       <input
         type={
           inputType === "password"
@@ -23,7 +23,7 @@ const CustomInput = ({ inputName, inputType, register, errors, validationName, i
             : inputType
         }
         {...register(validationName,{required: isRequired})}
-        className={`py-3 px-4 rounded-lg outline-none border  w-full ${errors[validationName] ? 'border-danger-100':'border-secondary'}`}
+        className={`py-3 px-4 rounded-lg outline-accent border  w-full ${errors[validationName] ? 'border-danger-100':'border-secondary'}`}
       />
       <label
         htmlFor="placeholder"
