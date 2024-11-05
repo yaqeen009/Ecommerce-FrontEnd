@@ -40,6 +40,7 @@ const Cart = () => {
                   price={item.price}
                   inStock={"In Stock"}
                   amount={item.amount}
+                  isCheckOut={false}
                 />
               );
             })
@@ -50,11 +51,11 @@ const Cart = () => {
         {cart.length > 0 && (
           <div className="flex flex-col w-1/3 md:w-1/2 sm:w-full space-y-4">
             <CartSummary
-              subtotal={totalPrice}
-              delivery={5.0}
-              tax={7.49}
-              promo={10.0}
-              orderTotal={Math.floor(totalPrice + 5.0 + 7.49 - 10.0)}
+              subtotal={totalPrice.toFixed(2)}
+              delivery={5.0.toFixed(2)}
+              tax={7.49.toFixed(2)}
+              promo={10.00.toFixed(2)}
+              orderTotal={Math.floor(totalPrice + 5.0 + 7.49 - 10.0).toFixed(2)}
             />
             <ButtonComp
               btnName={"Proceed to Checkout"}
