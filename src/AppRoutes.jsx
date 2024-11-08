@@ -10,6 +10,7 @@ import ErrorPage from './pages/error';
 import Product from './pages/product';
 import Categories from './pages/categories';
 import Checkout from './pages/checkout';
+import Confirmation from './pages/orderConfirmation';
 
 const AppRoutes = () => {
   return (
@@ -26,6 +27,7 @@ const AppRoutes = () => {
         <Route path="/product/:productId" element={<Product/>}/>
         <Route path='/categories/:category' element={<Categories/>}/>
         <Route path='/checkout' element={<Checkout/>}/>
+        <Route path='/order-confirmation' element={<Confirmation/>}/>
       </Routes>
     </div>
   );

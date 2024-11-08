@@ -5,8 +5,8 @@ import AppRoutes from "./AppRoutes";
 
 function App() {
   const location = useLocation();
-  const hideFooterRoutes = ["/login","/checkout"];
-  const hideHeaderRoutes = ["/checkout","/login"]
+  const hideFooterRoutes = ["/login","/checkout","/order-confirmation"];
+  const hideHeaderRoutes = ["/checkout","/login","/order-confirmation"]
   const showHeader = !hideHeaderRoutes.includes(location.pathname) && location.pathname !== '*'
   const showFooter =
     !hideFooterRoutes.includes(location.pathname) &&

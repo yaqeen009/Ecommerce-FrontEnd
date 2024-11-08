@@ -1,6 +1,6 @@
-//image imports
 import reduceBtn from "../assets/reduce.svg";
 import expandBtn from "../assets/expand.svg";
+import drawer from "../assets/open-accent.svg";
 
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -8,10 +8,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import CustomInput from "../components/customInputField";
 
-const Payment = ({submitForm}) => {
+const Payment = ({ submitForm }) => {
+  //states and hooks
   const [isBank, setIsBank] = useState(false);
   const [isMomo, setIsMomo] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedProvider, setSelectedProvider] = useState("");
 
+  //validation schema
   const schema = yup.object().shape({
     bankname: yup
       .string()
@@ -32,6 +36,7 @@ const Payment = ({submitForm}) => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
+  //functionalities and click events
   const handleExpandBank = () => {
     setIsBank((prev) => !prev);
     setIsMomo(false);
@@ -40,6 +45,17 @@ const Payment = ({submitForm}) => {
     setIsBank(false);
     setIsMomo((prev) => !prev);
   };
+  const handleOpen = () => {
+    setIsOpen((prev) => !prev);
+  };
+  const handleClick = (item) => {
+    setSelectedProvider(item); // Set the selected provider
+    setIsOpen(false); // Close the drawer
+    console.log(item);
+  };
+
+  //objects
+  const mobileMoney = ["MTN Mobile Money", "Telecel Pay", "AT Money"];
 
   return (
     <div>
@@ -114,16 +130,39 @@ const Payment = ({submitForm}) => {
           {isMomo && (
             <form
               action=""
-              className="w-full grid grid-cols-1 gap-y-2 mb-4"
+              className="w-full grid grid-cols-2 gap-x-2 mb-4 items-baseline"
               onSubmit={handleSubmit(submitForm)}
             >
-              <div className="flex flex-col">
-                <label htmlFor="">Select Network</label>
-                <select name="network" id="">
-                  <option value="">MTN Mobile Money</option>
-                  <option value="">Telecel Pay</option>
-                  <option value="">AirtelTigo Money</option>
-                </select>
+              <div className="drawer relative mb-2">
+                <span
+                  onClick={handleOpen}
+                >
+                  <div className="flex space-x-2 items-center py-3 px-4 border border-secondary rounded-lg">
+                  <p className="font-open_sans text-font text-mobile-label md:text-tablet-label lg:text-label ">
+                    {selectedProvider || "Select mobile network"}
+                  </p>
+                  <img
+                    src={drawer}
+                    alt=""
+                    className={`w-3 h-2 ${
+                      isOpen && `rotate-180`
+                    } duration-300 ease-in`}
+                  />
+                  </div>
+                </span>
+                {isOpen && (
+                  <div className="flex flex-col pl-2 pr-4 bg-background absolute z-10 shadow-2dp rounded-sm">
+                    {mobileMoney.map((filter, index) => (
+                      <p
+                        onClick={() => handleClick(filter)}
+                        key={index}
+                        className="text-nowrap font-open_sans text-font text-mobile-label md:text-tablet-label lg:text-label py-2 hover:bg-accent hover:text-background hover:-mr-4 hover:-ml-2 hover:pl-1 duration-150"
+                      >
+                        {filter}
+                      </p>
+                    ))}
+                  </div>
+                )}
               </div>
               <CustomInput
                 inputName={"Mobile Money Number"}

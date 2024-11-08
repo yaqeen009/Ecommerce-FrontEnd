@@ -32,7 +32,10 @@ const Checkout = () => {
   const handleCheck = () => {
     setIsChecked((prev) => !prev);
   };
-  //function for displaying cart items
+
+  const goToConfirm = () => {
+    navigate("/order-confirmation")
+  }
   //objects
   //utils
   return (
@@ -47,6 +50,9 @@ const Checkout = () => {
             color2={"bg-primary"}
             styleCol1={"#91CAFF"}
             styleCol2={"#003366"}
+            isBar1={false}
+            isBar2={true}
+            isBar3={false}
           />
         </span>
         <section className="payment mr-4">
@@ -68,6 +74,7 @@ const Checkout = () => {
             btnColor={"bg-accent hover:bg-primary"}
             btnTextColor={"text-background "}
             btnTextSize={"mx-[45%] py-2"}
+            btnFunction={goToConfirm}
           />
         </span>
       </div>

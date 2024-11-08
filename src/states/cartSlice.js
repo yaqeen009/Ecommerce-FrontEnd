@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
+// Load cart from session storage or initialize with empty array
+const savedCart = JSON.parse(sessionStorage.getItem('cart')) || [];
 
 export const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    // cart: savedCart,
-    cart:[],
-    totalAmount: 0,
-    totalPrice: 0,
+    cart: savedCart,
+    totalAmount: savedCart.reduce((total, item) => total + item.amount, 0),
+    totalPrice: savedCart.reduce((total, item) => total + item.totalPrice, 0),
   },
   reducers: {
     addToCart(state, action) {
@@ -33,12 +33,13 @@ export const cartSlice = createSlice({
         state.totalAmount++;
         state.totalPrice += product.price;
 
-        // localStorage.setItem('cart', JSON.stringify(state.cart));
+        // Save updated cart to session storage
+        sessionStorage.setItem('cart', JSON.stringify(state.cart));
       } catch (error) {
         return error;
       }
     },
-    deleteFromCart(state, action){
+    deleteFromCart(state, action) {
       const product = action.payload;
       try {
         const exist = state.cart.find(
@@ -48,16 +49,17 @@ export const cartSlice = createSlice({
             item.color === product.color
         );
         if (exist) {
-            state.cart = state.cart.filter(
-              (item) =>
-                item.id !== product.id ||
-                item.size !== product.size ||
-                item.color !== product.color
-            );
-          state.totalAmount--;
-          state.totalPrice -= (product.price * product.amount);
+          state.cart = state.cart.filter(
+            (item) =>
+              item.id !== product.id ||
+              item.size !== product.size ||
+              item.color !== product.color
+          );
+          state.totalAmount -= exist.amount;
+          state.totalPrice -= exist.totalPrice;
 
-          // localStorage.setItem('cart', JSON.stringify(state.cart));
+          // Save updated cart to session storage
+          sessionStorage.setItem('cart', JSON.stringify(state.cart));
         }
       } catch (error) {
         return error;
@@ -87,19 +89,20 @@ export const cartSlice = createSlice({
           state.totalAmount--;
           state.totalPrice -= product.price;
 
-          // localStorage.setItem('cart', JSON.stringify(state.cart));
+          // Save updated cart to session storage
+          sessionStorage.setItem('cart', JSON.stringify(state.cart));
         }
       } catch (error) {
         return error;
       }
     },
-
     clearCart(state) {
       state.cart = [];
       state.totalAmount = 0;
       state.totalPrice = 0;
 
-      // localStorage.removeItem('cart');
+      // Remove cart from session storage
+      sessionStorage.removeItem('cart');
     },
   },
 });

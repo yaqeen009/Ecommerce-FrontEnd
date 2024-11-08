@@ -18,6 +18,7 @@ const CartItem = ({
   price,
   amount,
   isCheckOut,
+  
 }) => {
   const dispatch = useDispatch();
 
@@ -100,7 +101,7 @@ const CartItem = ({
                 {isCheckOut && (
                   <>
                     <p>|</p>
-                    <p>{amount}</p>
+                    <p>x{amount}</p>
                   </>
                 )}
               </div>
