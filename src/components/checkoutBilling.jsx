@@ -7,41 +7,58 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import CustomInput from "./customInputField";
+import { useSelector } from "react-redux";
 
 const Billing = ({ isChecked, handleCheck, submitForm, setBillingDetails }) => {
   //states
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
 
-  //validation and validation schema
-  const schema = yup.object().shape({
-    firstname: yup.string().required("First Name is required"),
-    lastname: yup.string().required("Last Name is required"),
-    address: yup.string().required("Address is required"),
-    phone: yup
-      .string()
-      .required("Account number is required")
-      .min(10, "Please enter a valid phone number"),
-    city: yup.string().required("City name is required"),
-    apartment: yup.string(),
-  });
+  //validation schema
+const schema = yup.object().shape({
+  firstname: yup.string().required("First Name is required"),
+  lastname: yup.string().required("Last Name is required"),
+  address: yup.string().required("Address is required"),
+  phone: yup
+    .string()
+    .required("Account number is required")
+    .min(10, "Please enter a valid phone number"),
+  city: yup.string().required("City name is required"),
+  apartment: yup.string(),
+});
+
+  //form validation
   const {
     register,
     handleSubmit,
+    setValue,
     watch,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const billingVals = watch()
+  const billingVals = watch();
   //functionalities
   useEffect(() => {
-    setBillingDetails(billingVals)
-  }, [billingVals, setBillingDetails])
+    if (isAuthenticated && user.billing) {
+      setValue("firstname", user.billing.firstName);
+      setValue("lastname", user.billing.lastName);
+      setValue("address", user.billing.address);
+      setValue("phone", user.billing.contact);
+      setValue("city", user.billing.city);
+      setValue("apartment", user.billing.apartment);
+    }
+  }, [isAuthenticated, user, setValue]);
+
+  useEffect(() => {
+    setBillingDetails(billingVals);
+  }, [billingVals, setBillingDetails]);
   return (
     <div className="billing-details w-full mr-2 mb-4">
       <h1 className="font-montserrat text-primary text-mobile-title md:text-tablet-title lg:text-title">
         Billing Address
       </h1>
       <div className=" w-full my-4 ">
-        <form onSubmit={handleSubmit(submitForm)} action="" className="w-full grid grid-cols-1 gap-y-2 mb-4">
+        <form  onSubmit={handleSubmit(submitForm)} className="w-full grid grid-cols-1 gap-y-2 mb-4"
+        >
           <div className="grid grid-cols-2 gap-x-2">
             <CustomInput
               inputName={"First name"}

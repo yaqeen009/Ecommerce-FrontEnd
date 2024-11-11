@@ -8,10 +8,12 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import CustomInput from "./customInputField";
+import { useSelector } from "react-redux";
 
 const Shipping = ({ isDisabled, submitForm , setShippingDetails}) => {
   //states
   const [isExpanded, setIsExpanded] = useState(false);
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
   //validation and validation schema
   const schema = yup.object().shape({
     firstname: yup.string().required("First Name is required"),
@@ -27,11 +29,23 @@ const Shipping = ({ isDisabled, submitForm , setShippingDetails}) => {
   const {
     register,
     handleSubmit,
+    setValue,
     watch,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
   const shippingVals = watch()
+
+  useEffect(() => {
+    if (isAuthenticated && user.billing) {
+      setValue("firstname", user.shipping.firstName);
+      setValue("lastname", user.shipping.lastName);
+      setValue("address", user.shipping.address);
+      setValue("phone", user.shipping.contact);
+      setValue("city", user.shipping.city);
+      setValue("apartment", user.shipping.apartment);
+    }
+  }, [isAuthenticated, user, setValue]);
 
   useEffect(() => {
     setShippingDetails(shippingVals)
