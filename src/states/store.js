@@ -2,7 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import cartSlice from "./cartSlice";
 import authSlice from "./authSlice";
 import productSlice from "./categoriesSlice"
-import { removeOrder, saveOrder, updateOrder } from "./orderSlice";
+import orderSlice from "./orderSlice";
+
 
 
 
@@ -11,7 +12,7 @@ const store = configureStore({
         cart: cartSlice,
         auth: authSlice.reducer,
         filter: productSlice,
-        orders: saveOrder, removeOrder, updateOrder
+        orders: orderSlice.reducer
     }
 })
 

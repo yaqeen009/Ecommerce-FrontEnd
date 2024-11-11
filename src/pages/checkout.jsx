@@ -11,18 +11,35 @@ import ButtonComp from "../components/button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CartItem from "../components/cartItem";
+import { saveOrder } from "../states/orderSlice";
+import { clearCart } from "../states/cartSlice";
 
 const Checkout = () => {
   //states and hooks
   const [isChecked, setIsChecked] = useState(true);
+  const [paymentDetails, setPaymentDetails] = useState({})
+  const [billingDetails, setBillingDetails] = useState({})
+  const [shippingDetails, setShippingDetails] = useState({})
+
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
   const { totalPrice } = useSelector((state) => state.cart);
   const navigate = useNavigate();
 
   //functionalities
-  const submitForm = (data) => {
-    console.log(data);
+  const submitForm = () => {
+    const orderData = {
+      id: new Date().getTime(),
+      payment: paymentDetails,
+      billing: billingDetails,
+      shipping: shippingDetails,
+      cartItems: cart,
+      total: totalPrice, 
+      date: new Date().toString
+    }
+    dispatch(saveOrder(orderData))
+    navigate("/order-confirmation")
+    console.log(orderData);
   };
 
   const goToCart = () => {
@@ -32,10 +49,6 @@ const Checkout = () => {
   const handleCheck = () => {
     setIsChecked((prev) => !prev);
   };
-
-  const goToConfirm = () => {
-    navigate("/order-confirmation")
-  }
   //objects
   //utils
   return (
@@ -56,15 +69,15 @@ const Checkout = () => {
           />
         </span>
         <section className="payment mr-4">
-          <Payment submitForm={submitForm} />
+          <Payment submitForm={submitForm}  setPaymentDetails={setPaymentDetails}/>
         </section>
 
         <section className="billing-details mr-4">
-          <Billing isChecked={isChecked} handleCheck={handleCheck} />
+          <Billing isChecked={isChecked} handleCheck={handleCheck} submitForm={submitForm} setBillingDetails={setBillingDetails}/>
         </section>
 
         <section className="shipping-details mr-4">
-          <Shipping isDisabled={isChecked} />
+          <Shipping isDisabled={isChecked}  submitForm={submitForm} setShippingDetails={setShippingDetails}/>
         </section>
 
         <span className="mt-16 mb-4 w-full pr-4">
@@ -74,7 +87,7 @@ const Checkout = () => {
             btnColor={"bg-accent hover:bg-primary"}
             btnTextColor={"text-background "}
             btnTextSize={"mx-[45%] py-2"}
-            btnFunction={goToConfirm}
+            btnFunction={submitForm}
           />
         </span>
       </div>

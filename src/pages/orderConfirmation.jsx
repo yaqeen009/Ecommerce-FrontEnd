@@ -4,22 +4,26 @@ import bag from "../assets/bag.svg";
 
 import { useNavigate } from "react-router-dom";
 import Process from "../components/checkoutProcess";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CartItem from "../components/cartItem";
 import ConfirmedCart from "../components/confirmedCartItem";
+import { clearCart } from "../states/cartSlice";
 
 const Confirmation = () => {
   //states and hooks
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart.cart);
   //functionalities and click events
   const goToCart = () => {
     navigate("/cart");
+    dispatch(clearCart())
   };
   const goToSupport = () => {};
   const trackOrder = () => {};
   const goToShopping = () => {
     navigate("/shop");
+    dispatch(clearCart())
   };
   //utils
   //objects

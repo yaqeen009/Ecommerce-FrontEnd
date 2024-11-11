@@ -5,10 +5,10 @@ import drawer from "../assets/open-accent.svg";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomInput from "../components/customInputField";
 
-const Payment = ({ submitForm }) => {
+const Payment = ({ submitForm, setPaymentDetails }) => {
   //states and hooks
   const [isBank, setIsBank] = useState(false);
   const [isMomo, setIsMomo] = useState(false);
@@ -33,8 +33,11 @@ const Payment = ({ submitForm }) => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+
+  const paymentVals = watch()
 
   //functionalities and click events
   const handleExpandBank = () => {
@@ -53,7 +56,10 @@ const Payment = ({ submitForm }) => {
     setIsOpen(false); // Close the drawer
     console.log(item);
   };
-
+  //utils
+  useEffect(() => {
+    setPaymentDetails(paymentVals)
+  },[paymentVals, setPaymentDetails])
   //objects
   const mobileMoney = ["MTN Mobile Money", "Telecel Pay", "AT Money"];
 
@@ -96,7 +102,7 @@ const Payment = ({ submitForm }) => {
                 inputName={"Account Name"}
                 inputType={"text"}
                 register={register}
-                validationName={"bankname"}
+                validationName={"accountname"}
                 isRequired={true}
                 errors={errors}
                 checkout={true}
@@ -105,7 +111,7 @@ const Payment = ({ submitForm }) => {
                 inputName={"Account Number"}
                 inputType={"text"}
                 register={register}
-                validationName={"bankname"}
+                validationName={"accountnum"}
                 isRequired={true}
                 errors={errors}
                 checkout={true}

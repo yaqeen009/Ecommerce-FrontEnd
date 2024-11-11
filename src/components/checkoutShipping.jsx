@@ -6,10 +6,10 @@ import disabledExpand from "../assets/expand_disabled.svg";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomInput from "./customInputField";
 
-const Shipping = ({ isDisabled }) => {
+const Shipping = ({ isDisabled, submitForm , setShippingDetails}) => {
   //states
   const [isExpanded, setIsExpanded] = useState(false);
   //validation and validation schema
@@ -27,8 +27,15 @@ const Shipping = ({ isDisabled }) => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+
+  const shippingVals = watch()
+
+  useEffect(() => {
+    setShippingDetails(shippingVals)
+  }, [shippingVals, setShippingDetails])
 
   //functionalities
   const handleExpand = () => {
@@ -55,7 +62,7 @@ const Shipping = ({ isDisabled }) => {
       </span>
       <div className=" w-full my-4 ">
         {isExpanded && (
-          <form action="" className="w-full grid grid-cols-1 gap-y-2 mb-4">
+          <form onSubmit={handleSubmit(submitForm)} action="" className="w-full grid grid-cols-1 gap-y-2 mb-4">
             <div className="grid grid-cols-2 gap-x-2">
               <CustomInput
                 inputName={"First name"}
@@ -103,7 +110,7 @@ const Shipping = ({ isDisabled }) => {
                 inputName={"Apartment, suite, etc (Optional)"}
                 inputType={"text"}
                 errors={errors}
-                validationName={"firstname"}
+                validationName={"apartment"}
                 register={register}
                 checkout={true}
               />

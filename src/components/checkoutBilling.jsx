@@ -5,10 +5,10 @@ import uncheck from "../assets/unchecked.svg";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomInput from "./customInputField";
 
-const Billing = ({ isChecked, handleCheck }) => {
+const Billing = ({ isChecked, handleCheck, submitForm, setBillingDetails }) => {
   //states
 
   //validation and validation schema
@@ -26,18 +26,22 @@ const Billing = ({ isChecked, handleCheck }) => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
+  const billingVals = watch()
   //functionalities
-
+  useEffect(() => {
+    setBillingDetails(billingVals)
+  }, [billingVals, setBillingDetails])
   return (
     <div className="billing-details w-full mr-2 mb-4">
       <h1 className="font-montserrat text-primary text-mobile-title md:text-tablet-title lg:text-title">
         Billing Address
       </h1>
       <div className=" w-full my-4 ">
-        <form action="" className="w-full grid grid-cols-1 gap-y-2 mb-4">
+        <form onSubmit={handleSubmit(submitForm)} action="" className="w-full grid grid-cols-1 gap-y-2 mb-4">
           <div className="grid grid-cols-2 gap-x-2">
             <CustomInput
               inputName={"First name"}
@@ -85,7 +89,7 @@ const Billing = ({ isChecked, handleCheck }) => {
               inputName={"Apartment, suite, etc (Optional)"}
               inputType={"text"}
               errors={errors}
-              validationName={"firstname"}
+              validationName={"apartment"}
               register={register}
               checkout={true}
             />
