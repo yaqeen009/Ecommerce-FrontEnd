@@ -17,9 +17,11 @@ import { clearCart } from "../states/cartSlice";
 const Checkout = () => {
   //states and hooks
   const [isChecked, setIsChecked] = useState(true);
-  const [paymentDetails, setPaymentDetails] = useState({})
-  const [billingDetails, setBillingDetails] = useState({})
-  const [shippingDetails, setShippingDetails] = useState({})
+  const [isBank, setIsBank] = useState(false);
+  const [isMomo, setIsMomo] = useState(false);
+  const [paymentDetails, setPaymentDetails] = useState({});
+  const [billingDetails, setBillingDetails] = useState({});
+  const [shippingDetails, setShippingDetails] = useState({});
 
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
@@ -34,11 +36,12 @@ const Checkout = () => {
       billing: billingDetails,
       shipping: shippingDetails,
       cartItems: cart,
-      total: totalPrice, 
-      date: new Date().toString
-    }
-    dispatch(saveOrder(orderData))
-    navigate("/order-confirmation")
+      total: totalPrice,
+      date: new Date().toString(),
+    };
+    dispatch(saveOrder(orderData));
+    navigate("/order-confirmation");
+    dispatch(clearCart());
     console.log(orderData);
   };
 
@@ -69,15 +72,31 @@ const Checkout = () => {
           />
         </span>
         <section className="payment mr-4">
-          <Payment submitForm={submitForm}  setPaymentDetails={setPaymentDetails}/>
+          <Payment
+            submitForm={submitForm}
+            setPaymentDetails={setPaymentDetails}
+            isBank={isBank}
+            setIsBank={setIsBank}
+            isMomo={isMomo}
+            setIsMomo={setIsMomo}
+          />
         </section>
 
         <section className="billing-details mr-4">
-          <Billing isChecked={isChecked} handleCheck={handleCheck} submitForm={submitForm} setBillingDetails={setBillingDetails}/>
+          <Billing
+            isChecked={isChecked}
+            handleCheck={handleCheck}
+            submitForm={submitForm}
+            setBillingDetails={setBillingDetails}
+          />
         </section>
 
         <section className="shipping-details mr-4">
-          <Shipping isDisabled={isChecked}  submitForm={submitForm} setShippingDetails={setShippingDetails}/>
+          <Shipping
+            isDisabled={isChecked}
+            submitForm={submitForm}
+            setShippingDetails={setShippingDetails}
+          />
         </section>
 
         <span className="mt-16 mb-4 w-full pr-4">
@@ -141,7 +160,7 @@ const Checkout = () => {
                 Delivery
               </p>
               <p className="text-mobile-body md:text-tablet-body lg:text-body font-open_sans text-background">
-                {5.00.toFixed(2)}
+                {(5.0).toFixed(2)}
               </p>
             </span>
             <span className="flex flex-row justify-between">
@@ -149,7 +168,7 @@ const Checkout = () => {
                 Tax
               </p>
               <p className="text-mobile-body md:text-tablet-body lg:text-body font-open_sans text-background">
-                {7.49.toFixed(2)}
+                {(7.49).toFixed(2)}
               </p>
             </span>
             <span className="flex flex-row justify-between">
@@ -157,7 +176,7 @@ const Checkout = () => {
                 Promo
               </p>
               <p className="text-mobile-body md:text-tablet-body lg:text-body font-open_sans text-background">
-                {10.00.toFixed(2)}
+                {(10.0).toFixed(2)}
               </p>
             </span>
           </div>
@@ -167,7 +186,7 @@ const Checkout = () => {
               Order Total
             </p>
             <p className="text-mobile-title md:text-tablet-title lg:text-title font-montserrat text-background">
-            {(totalPrice + 5.0 + 7.49 - 10.0).toFixed(2)}
+              {(totalPrice + 5.0 + 7.49 - 10.0).toFixed(2)}
             </p>
           </span>
         </div>

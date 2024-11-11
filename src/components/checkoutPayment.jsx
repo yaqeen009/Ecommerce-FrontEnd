@@ -8,36 +8,74 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import CustomInput from "../components/customInputField";
 
-const Payment = ({ submitForm, setPaymentDetails }) => {
-  //states and hooks
-  const [isBank, setIsBank] = useState(false);
-  const [isMomo, setIsMomo] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedProvider, setSelectedProvider] = useState("");
+
 
   //validation schema
   const schema = yup.object().shape({
-    bankname: yup
+    bankname: yup.string().when("isBank", {
+      is: true,
+      then: yup
+        .string()
+        .required("Bank Name is required")
+        .min(4, "Bank name must be at least 4 characters"),
+    }),
+    accountname: yup.string().when("isBank", {
+      is: true,
+      then: yup
+        .string()
+        .required("Account name is required")
+        .min(8, "Please enter a valid account name"),
+    }),
+    accountnum: yup.string().when("isBank", {
+      is: true,
+      then: yup
       .string()
-      .required("Bank Name is required")
-      .min(4, "Bank name must be at least 4 characters"),
-    accountname: yup
+        .required("Account number is required")
+        .min(14, "Please enter a valid account number"),
+    }),
+    momonum: yup.string().when("isMomo", {
+      is: true,
+      then: yup
       .string()
-      .required("Account name is required")
-      .min(8, "Please enter a valid account name"),
-    accounnum: yup
-      .string()
-      .required("Account number is required")
-      .min(14, "Please enter a valid account number"),
+        .required("Mobile money number is required")
+        .min(10, "Please enter a valid mobile money number"),
+    }),
+    momoprovider: yup.string().when("isMomo", {
+      is: true,
+      then: yup.string().required("Please select a mobile money provider"),
+    }),
   });
+
+const Payment = ({
+  submitForm,
+  setPaymentDetails,
+  isBank,
+  setIsBank,
+  isMomo,
+  setIsMomo,
+}) => {
+  //states and hooks
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedProvider, setSelectedProvider] = useState("");
+
   const {
     register,
     handleSubmit,
+    setValue,
     watch,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const paymentVals = watch()
+  const paymentVals = watch();
+
+  // Sync payment details with form data and selected provider
+  useEffect(() => {
+    setPaymentDetails({
+      ...paymentVals,
+      momoprovider: selectedProvider,
+    });
+  }, [paymentVals, selectedProvider, setPaymentDetails]);
+  
 
   //functionalities and click events
   const handleExpandBank = () => {
@@ -51,15 +89,13 @@ const Payment = ({ submitForm, setPaymentDetails }) => {
   const handleOpen = () => {
     setIsOpen((prev) => !prev);
   };
-  const handleClick = (item) => {
-    setSelectedProvider(item); // Set the selected provider
+  const handleClick = (provider) => {
+    setSelectedProvider(provider); // Set the selected provider
+    setValue("momoprovider", provider); // Set the value in form
     setIsOpen(false); // Close the drawer
-    console.log(item);
+    console.log(provider);
   };
-  //utils
-  useEffect(() => {
-    setPaymentDetails(paymentVals)
-  },[paymentVals, setPaymentDetails])
+ 
   //objects
   const mobileMoney = ["MTN Mobile Money", "Telecel Pay", "AT Money"];
 
@@ -140,20 +176,18 @@ const Payment = ({ submitForm, setPaymentDetails }) => {
               onSubmit={handleSubmit(submitForm)}
             >
               <div className="drawer relative mb-2">
-                <span
-                  onClick={handleOpen}
-                >
+                <span onClick={handleOpen}>
                   <div className="flex space-x-2 items-center py-3 px-4 border border-secondary rounded-lg">
-                  <p className="font-open_sans text-font text-mobile-label md:text-tablet-label lg:text-label ">
-                    {selectedProvider || "Select mobile network"}
-                  </p>
-                  <img
-                    src={drawer}
-                    alt=""
-                    className={`w-3 h-2 ${
-                      isOpen && `rotate-180`
-                    } duration-300 ease-in`}
-                  />
+                    <p className="font-open_sans text-font text-mobile-label md:text-tablet-label lg:text-label ">
+                      {selectedProvider || "Select mobile network"}
+                    </p>
+                    <img
+                      src={drawer}
+                      alt=""
+                      className={`w-3 h-2 ${
+                        isOpen && `rotate-180`
+                      } duration-300 ease-in`}
+                    />
                   </div>
                 </span>
                 {isOpen && (
@@ -174,7 +208,7 @@ const Payment = ({ submitForm, setPaymentDetails }) => {
                 inputName={"Mobile Money Number"}
                 inputType={"text"}
                 register={register}
-                validationName={"bankname"}
+                validationName={"momonum"}
                 isRequired={true}
                 errors={errors}
                 checkout={true}
