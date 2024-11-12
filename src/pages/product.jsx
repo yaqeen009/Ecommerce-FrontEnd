@@ -5,6 +5,8 @@ import ButtonComp from "../components/button";
 import Card from "../components/card";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../states/cartSlice";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 //icons
 import check from "../assets/stockCheck.svg";
@@ -43,7 +45,12 @@ const Product = () => {
       size: sizeState,
     }
     dispatch(addToCart(productToAdd))
-    alert('Item added to cart successfully!')
+    toast.success('Item added to cart successfully!', {
+      style: {
+        backgroundColor: '#FEFEFE',
+        color: '#4CAF50',
+        boxShadow:'0px 3px 3px 0px rgba(0, 0, 0, 0.14), 0px 3px 4px 0px rgba(0, 0, 0, 0.12), 0px 1px 8px 0px rgba(0, 0, 0, 0.20)'
+    }})
   }
 
   //fetch product data from database
@@ -236,6 +243,7 @@ const Product = () => {
             </ul>
           </div>
         </div>
+        <ToastContainer position="top-right"  />
       </div>
       <div className="my-8 mx-4 sm:mx-0">
         <h1 className="font-montserrat text-font text-mobile-headline md:text-tablet-headline lg:text-headlind">

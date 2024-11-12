@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
 import NavComp from "./navComp";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 //imported assets
 import logo from "../assets/logo.png";
 import user from "../assets/user.svg";
-import cart from "../assets/bag.svg";
+import cartEmpty from "../assets/bag.svg";
+import cartFilled from "../assets/bagFilled.svg";
 import search from "../assets/search.svg";
 import burger from "../assets/burger.svg";
 import logo2 from "../assets/logo2.png";
-import { useSelector } from "react-redux";
+
 import CancelBtn from "../assets/cancel";
 
 const NavBar = () => {
@@ -18,6 +20,7 @@ const NavBar = () => {
 
   //manage global state
   const { isAuthenticated } = useSelector((state) => state.auth);
+  const cart = useSelector((state) => state.cart.cart )
 
   const handleClick = () => {
     setIsCliked(!isClicked);
@@ -25,7 +28,6 @@ const NavBar = () => {
   const handleExpand = () => {
     setIsExpanded(!isExpanded);
   };
-
 
   return (
     <div className="nav-bar mt-3">
@@ -68,7 +70,7 @@ const NavBar = () => {
               <img src={user} className="w-4 h-4" />
             </Link>
             <Link to={"/cart"}>
-              <img src={cart} className="w-4 h-4" />
+              {(cart.length > 0) ? (<img src={cartEmpty} className="w-4 h-4" />) : (<img src={cartFilled} className="w-4 h-4" />) }
             </Link>
           </div>
         </div>
@@ -122,7 +124,7 @@ const NavBar = () => {
           </Link>
           <Link to={"/cart"} className="flex items-center space-x-2">
             <p className="text-primary text-label">Cart</p>
-            <img src={cart} className="w-4 h-4" />
+            {(cart.length > 0) ? (<img src={cartFilled} className="w-4 h-4" />) : (<img src={cartEmpty} className="w-4 h-4" />) }
           </Link>
         </div>
       </div>

@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Card from "../components/card";
 import Divider from "../components/divider";
 import Category from "../components/categoryCard";
+import { ToastContainer, toast } from "react-toastify";
 
 //image imports
 import gym from "../assets/slider/gym.jpg";
@@ -41,7 +42,12 @@ const Home = () => {
       size: sizeState,
     }
     dispatch(addToCart(productToAdd))
-    console.log("Item added to cart");
+    toast.success('Item added to cart successfully!', {
+      style: {
+        backgroundColor: '#FEFEFE',
+        color: '#4CAF50',
+        boxShadow:'0px 3px 3px 0px rgba(0, 0, 0, 0.14), 0px 3px 4px 0px rgba(0, 0, 0, 0.12), 0px 1px 8px 0px rgba(0, 0, 0, 0.20)'
+    }})
   }
   const handleProdClick = (productId) => {      //go to product page
     navigate(`/product/${productId + 1}`)
@@ -83,6 +89,7 @@ const Home = () => {
           );
         })}
       </div>
+      <ToastContainer/>
       </div>
       <Divider name={"Shop by Category"} />
       <div className="flex flex-row sm:flex-col basis-1/4 my-6 mb-12 items-center lg:mx-16 sm:mx-4 md:mx-8">

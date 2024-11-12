@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../states/cartSlice";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 //image imports 
 import boots from "../assets/cardImages/domboots.png";
 import jersey from "../assets/cardImages/jerseys.png";
@@ -36,8 +37,12 @@ const Shop = () => {
       size: sizeState,
     }
     dispatch(addToCart(productToAdd))
-    console.log("Item added to cart");
-    
+    toast.success('Item added to cart successfully!', {
+      style: {
+        backgroundColor: '#FEFEFE',
+        color: '#4CAF50',
+        boxShadow:'0px 3px 3px 0px rgba(0, 0, 0, 0.14), 0px 3px 4px 0px rgba(0, 0, 0, 0.12), 0px 1px 8px 0px rgba(0, 0, 0, 0.20)'
+    }})
   }
 
   //data fetching 
@@ -149,6 +154,7 @@ const Shop = () => {
           })}
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 };
