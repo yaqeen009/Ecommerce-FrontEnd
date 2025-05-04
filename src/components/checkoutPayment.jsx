@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import reduceBtn from "../assets/reduce.svg";
 import expandBtn from "../assets/expand.svg";
 import drawer from "../assets/open-accent.svg";
@@ -46,14 +47,7 @@ import CustomInput from "../components/customInputField";
     }),
   });
 
-const Payment = ({
-  submitForm,
-  setPaymentDetails,
-  isBank,
-  setIsBank,
-  isMomo,
-  setIsMomo,
-}) => {
+const Payment = ({submitForm,setPaymentDetails,isBank, setIsBank,isMomo,setIsMomo,}) => {
   //states and hooks
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProvider, setSelectedProvider] = useState("");

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 const ProcessBarComp = ({ color,color2, name }) => {
   return (
     <div className="relative flex flex-col items-center justify-center w-full">

@@ -1,6 +1,9 @@
+/* eslint-disable react/prop-types */
 import edit from '../assets/edit.svg'
 import ButtonComp from './button';
-
+/*
+component for custom headers in account page, with header props (header name and edit btn)
+*/
 const DetailHeaders = ({name, showEdit, handleClick}) => {
     return ( 
         <div className="detail-headers">

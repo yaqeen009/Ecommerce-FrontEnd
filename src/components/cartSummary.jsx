@@ -1,3 +1,10 @@
+/*
+component for handling cost summary 
+(subtotal cost, delivery cost, tax, promotion, and order total) 
+for products in cart
+*/
+
+/* eslint-disable react/prop-types */
 const CartSummary = ({subtotal, delivery, tax, promo, orderTotal}) => {
     return ( 
         <div className="cart-summary p-8 w-full bg-white rounded-xl">

@@ -1,3 +1,9 @@
+/*
+component for list of order histories in account page
+*/
+
+//recieves api endpoint for order history
+
 import ButtonComp from "./button";
 
 const OrderDetails = () => {

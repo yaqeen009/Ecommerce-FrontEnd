@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/jsx-key */
 import Carousel from "../components/slider";
 import gloves from "../assets/slider/gloves.jpeg";
 import ButtonComp from "../components/button";

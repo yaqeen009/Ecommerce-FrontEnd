@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import CustomInput from "./customInputField";
 import google from "../assets/google.svg";
 import { useForm } from "react-hook-form";
@@ -73,7 +74,7 @@ const SignIn = ({ signedIn, isopen }) => {
               <p className="font-open_sans text-font">Your Google account</p>
             </button>
             <p className="lg:text-label md:text-tablet-label text-mobile-label text-center text-secondary mt-4">
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <span onClick={signedIn} className="text-accent cursor-pointer">
                 Click here
               </span>{" "}

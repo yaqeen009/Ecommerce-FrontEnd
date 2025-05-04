@@ -1,3 +1,9 @@
+/*
+ component for product category card with props (category name, image and click event to go to said category)
+*/
+
+
+/* eslint-disable react/prop-types */
 
 
 const Category = ({name, image, gotoCategory}) => {

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 //images
 import check from "../assets/checked.svg";
 import uncheck from "../assets/unchecked.svg";
@@ -5,7 +6,7 @@ import uncheck from "../assets/unchecked.svg";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import CustomInput from "./customInputField";
 import { useSelector } from "react-redux";
 

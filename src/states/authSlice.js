@@ -64,7 +64,7 @@ export const authSlice = createSlice({
   reducers: {
     login(state, action) {
       //login reducer
-      const { username, password, email } = action.payload;
+      const { username, password } = action.payload;
       //mock for user auth
       const authUser = fakeUsers.find(
         (user) => user.username === username && user.password === password
@@ -114,7 +114,7 @@ export const authSlice = createSlice({
       }
     },
     updateAccount(state, action) {
-      const { username, email, contact, fullname } = action.payload;
+      const { username, email, contact, fullname, password } = action.payload;
       try {
         const userIndex = fakeUsers.findIndex((user) => user.id === state.user.id);
 

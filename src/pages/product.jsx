@@ -103,29 +103,29 @@ const Product = () => {
         <img
           src={productData.image.large}
           alt=""
-          className="w-full h-[90%] md:h-full sm:h-[50vh] rounded-lg object-cover"
+          className="w-full h-[90%] md:h-full sm:h-[50vh] rounded-lg  "
         />
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-8 sm:gap-x-4 gap-y-8 h-1/2 md:h-full">
           <img
             src={productData.image.small1}
             alt=""
-            className="rounded-lg h-full w-full object-cover"
+            className="rounded-lg h-full w-full "
           />
           <img
             src={productData.image.small2}
             alt=""
-            className="rounded-lg h-full w-full object-cover"
+            className="rounded-lg h-full w-full  "
           />
           <img
             src={productData.image.small3}
             alt=""
-            className="rounded-lg h-full w-full object-cover"
+            className="rounded-lg h-full w-full  "
           />
           <img
             src={productData.image.small4}
             alt=""
-            className="rounded-lg h-full w-full object-cover"
+            className="rounded-lg h-full w-full  "
           />
         </div>
       </div>

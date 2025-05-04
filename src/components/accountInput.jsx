@@ -1,3 +1,9 @@
+/*
+COMPONENT for custom inputs in account page, with props (input type, placeholder and disabled view)
+*/
+
+
+/* eslint-disable react/prop-types */
 const AccountInput = ({ type, placeholder,disabled}) => {
     return (
         <input

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 //image imports
 import logo from "../assets/logo3.png";
 import bag from "../assets/bag_white.svg";

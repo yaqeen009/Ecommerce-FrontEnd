@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import Carousel from "../components/slider";
 import useFetchData from "../hooks/useFetch";
 import { useNavigate } from "react-router-dom";

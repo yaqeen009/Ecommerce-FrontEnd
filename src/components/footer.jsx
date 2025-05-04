@@ -40,9 +40,9 @@ const Footer = () => {
             </div>
             <div className="flex flex-col sm:items-end">
               <span className="flex flex-row space-x-2 ">
-                <img src={twitter} className="w-6 h-6" />
-                <img src={facebook} className="w-6 h-6" />
-                <img src={insta} className="w-6 h-6" />
+                <img src={twitter} className="w-6 h-6 cursor-pointer hover:opacity-85" />
+                <img src={facebook} className="w-6 h-6 cursor-pointer hover:opacity-85" />
+                <img src={insta} className="w-6 h-6 cursor-pointer hover:opacity-85" />
               </span>
               <p className="text-background mt-2 font-open_sans">
                 dominiongh@gmail.com

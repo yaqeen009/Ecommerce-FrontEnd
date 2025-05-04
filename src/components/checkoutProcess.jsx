@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import ProcessBarComp from "./process";
 
 const Process = ({ color1, color2, styleCol1, styleCol2, isBar1, isBar2, isBar3 }) => {

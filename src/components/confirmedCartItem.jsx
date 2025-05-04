@@ -1,12 +1,9 @@
-import checked from "../assets/stockCheck.svg";
-import del from "../assets/cancel.svg";
-import edit from "../assets/edit.svg";
-import increase from "../assets/inc.svg";
-import decrease from "../assets/dec.svg";
+/* eslint-disable react/prop-types */
+
 import { useDispatch } from "react-redux";
 import { addToCart, deleteFromCart, removeFromCart } from "../states/cartSlice";
 import { useNavigate } from "react-router-dom";
-import CancelBtn from "../assets/cancel";
+
 
 const ConfirmedCart = ({ id, name, color, size, image, price, amount }) => {
   const dispatch = useDispatch();

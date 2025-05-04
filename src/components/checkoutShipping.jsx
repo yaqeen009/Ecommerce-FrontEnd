@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 //image imports
 import reduceBtn from "../assets/reduce.svg";
 import expandBtn from "../assets/expand.svg";
@@ -75,7 +76,7 @@ const Shipping = ({ isDisabled, submitForm , setShippingDetails}) => {
         )}
       </span>
       <div className=" w-full my-4 ">
-        {isExpanded && (
+        {(isExpanded && !isDisabled) && (
           <form onSubmit={handleSubmit(submitForm)} action="" className="w-full grid grid-cols-1 gap-y-2 mb-4">
             <div className="grid grid-cols-2 gap-x-2">
               <CustomInput

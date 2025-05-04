@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 //image imports
 import logo from "../assets/logo3.png";
 import bag from "../assets/bag.svg";
@@ -5,7 +6,6 @@ import bag from "../assets/bag.svg";
 import { useNavigate } from "react-router-dom";
 import Process from "../components/checkoutProcess";
 import { useDispatch, useSelector } from "react-redux";
-import CartItem from "../components/cartItem";
 import ConfirmedCart from "../components/confirmedCartItem";
 import { clearCart } from "../states/cartSlice";
 
@@ -13,7 +13,6 @@ const Confirmation = () => {
   //states and hooks
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart.cart);
   const order = useSelector((state) => state.orders.orderDetails);
   //functionalities and click events
   const goToCart = () => {
@@ -118,7 +117,7 @@ const Confirmation = () => {
                   Account name
                 </p>
                 <p className="font-open_sans text-font text-mobile-label md:text-tablet-label lg:text-label">
-                {order.payment.accountname}
+                  {order.payment.accountname}
                 </p>
               </span>
             )}
@@ -127,7 +126,7 @@ const Confirmation = () => {
                 Account number
               </p>
               <p className="font-open_sans text-font text-mobile-label md:text-tablet-label lg:text-label">
-              {order.payment.momoprovider !== "" ? (
+                {order.payment.momoprovider !== "" ? (
                   <>{order.payment.momonum}</>
                 ) : (
                   <>{order.payment.accountnum}</>
@@ -145,7 +144,7 @@ const Confirmation = () => {
                 Full name
               </p>
               <p className="font-open_sans text-font text-mobile-label md:text-tablet-label lg:text-label">
-                {order.billing.firstname + " "+ order.billing.lastname}
+                {order.billing.firstname + " " + order.billing.lastname}
               </p>
             </span>
             <span className="flex flex-row justify-between items-center my-2">
@@ -161,7 +160,7 @@ const Confirmation = () => {
                 Phone
               </p>
               <p className="font-open_sans text-font text-mobile-label md:text-tablet-label lg:text-label">
-              {order.billing.phone}
+                {order.billing.phone}
               </p>
             </span>
             <span className="flex flex-row justify-between items-center my-2">
@@ -169,7 +168,7 @@ const Confirmation = () => {
                 City
               </p>
               <p className="font-open_sans text-font text-mobile-label md:text-tablet-label lg:text-label">
-              {order.billing.city}
+                {order.billing.city}
               </p>
             </span>
             <span className="flex flex-row justify-between items-center my-2">
@@ -177,7 +176,7 @@ const Confirmation = () => {
                 Apartment
               </p>
               <p className="font-open_sans text-font text-mobile-label md:text-tablet-label lg:text-label">
-              {order.billing.apartment}
+                {order.billing.apartment}
               </p>
             </span>
           </div>
@@ -199,7 +198,7 @@ const Confirmation = () => {
                 Delivery
               </p>
               <p className="font-open_sans text-font text-mobile-label md:text-tablet-label lg:text-label">
-              ${5.0.toFixed(2)}
+                ${(5.0).toFixed(2)}
               </p>
             </span>
             <span className="flex flex-row justify-between items-center my-2">
@@ -207,7 +206,7 @@ const Confirmation = () => {
                 Tax
               </p>
               <p className="font-open_sans text-font text-mobile-label md:text-tablet-label lg:text-label">
-              ${7.49.toFixed(2)}
+                ${(7.49).toFixed(2)}
               </p>
             </span>
             <span className="flex flex-row justify-between items-center my-2">
@@ -215,7 +214,7 @@ const Confirmation = () => {
                 Promo
               </p>
               <p className="font-open_sans text-font text-mobile-label md:text-tablet-label lg:text-label">
-              ${10.00.toFixed(2)}
+                ${(10.0).toFixed(2)}
               </p>
             </span>
             <span className="flex flex-row justify-between items-center my-2">
@@ -223,7 +222,7 @@ const Confirmation = () => {
                 Order Total
               </p>
               <p className="font-open_sans text-font text-mobile-body md:text-tablet-body lg:text-body">
-              ${Math.floor(order.total + 5.0 + 7.49 - 10.0).toFixed(2)}
+                ${Math.floor(order.total + 5.0 + 7.49 - 10.0).toFixed(2)}
               </p>
             </span>
           </div>
@@ -252,11 +251,12 @@ const Confirmation = () => {
 
 export default Confirmation;
 
-
-{/* <CartSummary
+{
+  /* <CartSummary
 subtotal={totalPrice.toFixed(2)}
 delivery={5.0.toFixed(2)}
 tax={7.49.toFixed(2)}
 promo={10.00.toFixed(2)}
 orderTotal={Math.floor(totalPrice + 5.0 + 7.49 - 10.0).toFixed(2)}
-/> */}
+/> */
+}

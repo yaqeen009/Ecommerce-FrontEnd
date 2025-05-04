@@ -1,5 +1,11 @@
+/*
+  component for a cart item with props 
+  (item id, name, color, size, image, stock avalability, price, cost amount and checkout state)
+*/
+
+
+/* eslint-disable react/prop-types */
 import checked from "../assets/stockCheck.svg";
-import del from "../assets/cancel.svg";
 import edit from "../assets/edit.svg";
 import increase from "../assets/inc.svg";
 import decrease from "../assets/dec.svg";
@@ -42,10 +48,10 @@ const CartItem = ({
     <div className="cart-item border-t-[1px] py-6 flex flex-row space-x-4 w-full justify-between h-[40hv]">
       <div
         className={`flex flex-row space-x-4 ${
-          isCheckOut ? `basis-[90%]` : `basis-4/5 `
+          isCheckOut ? `basis-[90%]` : `basis-9/10 `
         }`}
       >
-        <div className={`${isCheckOut ? `basis-[45%]` : `basis-1/3`}`}>
+        <div className={`${isCheckOut ? `basis-[45%]` : `basis-1/2`}`}>
           <img
             src={image}
             alt="prod-img"
