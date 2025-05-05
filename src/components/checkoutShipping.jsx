@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import CustomInput from "./customInputField";
 import { useSelector } from "react-redux";
 
-const Shipping = ({ isDisabled, submitForm , setShippingDetails}) => {
+const Shipping = ({ isDisabled, submitForm , setShippingDetails, checkRequired}) => {
   //states
   const [isExpanded, setIsExpanded] = useState(false);
   const { user, isAuthenticated } = useSelector((state) => state.auth);
@@ -86,6 +86,7 @@ const Shipping = ({ isDisabled, submitForm , setShippingDetails}) => {
                 validationName={"firstname"}
                 register={register}
                 checkout={true}
+                isRequired={checkRequired}
               />
               <CustomInput
                 inputName={"Last name"}
@@ -94,6 +95,7 @@ const Shipping = ({ isDisabled, submitForm , setShippingDetails}) => {
                 validationName={"lastname"}
                 register={register}
                 checkout={true}
+                isRequired={checkRequired}
               />
             </div>
             <CustomInput
@@ -103,6 +105,7 @@ const Shipping = ({ isDisabled, submitForm , setShippingDetails}) => {
               validationName={"address"}
               register={register}
               checkout={true}
+              isRequired={checkRequired}
             />
             <CustomInput
               inputName={"Phone"}
@@ -111,6 +114,7 @@ const Shipping = ({ isDisabled, submitForm , setShippingDetails}) => {
               validationName={"phone"}
               register={register}
               checkout={true}
+              isRequired={checkRequired}
             />
             <div className="grid grid-cols-2 gap-x-2">
               <CustomInput
@@ -120,6 +124,7 @@ const Shipping = ({ isDisabled, submitForm , setShippingDetails}) => {
                 validationName={"city"}
                 register={register}
                 checkout={true}
+                isRequired={checkRequired}
               />
               <CustomInput
                 inputName={"Apartment, suite, etc (Optional)"}

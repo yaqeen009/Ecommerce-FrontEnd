@@ -40,6 +40,9 @@ const Checkout = () => {
       total: totalPrice,
       date: new Date().toString(),
     };
+    // if (orderData == null) {
+    //   alert("")
+    // }
     dispatch(saveOrder(orderData));
     navigate("/order-confirmation");
     dispatch(clearCart());
@@ -81,6 +84,7 @@ const Checkout = () => {
             setIsBank={setIsBank}
             isMomo={isMomo}
             setIsMomo={setIsMomo}
+            checkRequired={true}
           />
         </section>
 
@@ -90,6 +94,7 @@ const Checkout = () => {
             handleCheck={handleCheck}
             submitForm={submitForm}
             setBillingDetails={setBillingDetails}
+            checkRequired={true}
           />
         </section>
 
@@ -98,6 +103,7 @@ const Checkout = () => {
             isDisabled={isChecked}
             submitForm={submitForm}
             setShippingDetails={setShippingDetails}
+            checkRequired={true}
           />
         </section>
 
@@ -113,7 +119,7 @@ const Checkout = () => {
         </span>
       </div>
       <div className="flex flex-col basis-2/5 bg-primary ml-auto h-full overflow-y-auto">
-        <div className="flex flex-col-reverse  w-screen">
+        <div className="flex sm:flex-col-reverse  w-screen">
           <span className="mb-4 sm:block hidden sm:scale-[0.7] self-center mr-8">
             <Process
               color1={"bg-success-200"}
@@ -128,7 +134,7 @@ const Checkout = () => {
           </span>
           <span
             onClick={goToCart}
-            className="flex self-end mr-4 mt-4 cursor-pointer"
+            className="flex self-end mr-4 mt-4 cursor-pointer absolute right-0 top-2"
           >
             <img src={bag} alt="" />
           </span>

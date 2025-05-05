@@ -47,7 +47,7 @@ import CustomInput from "../components/customInputField";
     }),
   });
 
-const Payment = ({submitForm,setPaymentDetails,isBank, setIsBank,isMomo,setIsMomo,}) => {
+const Payment = ({submitForm,setPaymentDetails,isBank, setIsBank,isMomo,setIsMomo,checkRequired, }) => {
   //states and hooks
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProvider, setSelectedProvider] = useState("");
@@ -124,7 +124,7 @@ const Payment = ({submitForm,setPaymentDetails,isBank, setIsBank,isMomo,setIsMom
                 inputType={"text"}
                 register={register}
                 validationName={"bankname"}
-                isRequired={true}
+                isRequired={checkRequired}
                 errors={errors}
                 checkout={true}
               />
@@ -133,7 +133,7 @@ const Payment = ({submitForm,setPaymentDetails,isBank, setIsBank,isMomo,setIsMom
                 inputType={"text"}
                 register={register}
                 validationName={"accountname"}
-                isRequired={true}
+                isRequired={checkRequired}
                 errors={errors}
                 checkout={true}
               />
@@ -142,7 +142,7 @@ const Payment = ({submitForm,setPaymentDetails,isBank, setIsBank,isMomo,setIsMom
                 inputType={"text"}
                 register={register}
                 validationName={"accountnum"}
-                isRequired={true}
+                isRequired={checkRequired}
                 errors={errors}
                 checkout={true}
               />
@@ -166,7 +166,7 @@ const Payment = ({submitForm,setPaymentDetails,isBank, setIsBank,isMomo,setIsMom
           {isMomo && (
             <form
               action=""
-              className="w-full grid grid-cols-2 sm:grid-cols-1 sm:gap-0 gap-x-2 mb-4 items-baseline"
+              className="w-full grid grid-cols-2 sm:grid-cols-1 sm:gap-x-0 gap-x-2 mb-4 items-end"
               onSubmit={handleSubmit(submitForm)}
             >
               <div className="drawer relative mb-2">
@@ -203,7 +203,7 @@ const Payment = ({submitForm,setPaymentDetails,isBank, setIsBank,isMomo,setIsMom
                 inputType={"text"}
                 register={register}
                 validationName={"momonum"}
-                isRequired={true}
+                isRequired={checkRequired}
                 errors={errors}
                 checkout={true}
               />
