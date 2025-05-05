@@ -54,7 +54,7 @@ const Product = () => {
   }
 
   //fetch product data from database
-  const url = "/public/data.json";
+  const url = "/data.json";
   const { data, loading, error } = useFetchData(url);
   const productData = data?.products?.featured?.find(
     (item) => item.id === Number(productId)
