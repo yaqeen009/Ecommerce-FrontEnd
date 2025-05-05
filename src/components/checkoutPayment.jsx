@@ -152,7 +152,7 @@ const Payment = ({submitForm,setPaymentDetails,isBank, setIsBank,isMomo,setIsMom
         </div>
       </div>
       <div className="momo-payment">
-        <span className="my-4 flex sm:flex-col justify-between">
+        <span className="my-4 flex justify-between">
           <p>Mobile Money</p>
           <button onClick={handleExpandMomo}>
             {isMomo ? (
@@ -166,7 +166,7 @@ const Payment = ({submitForm,setPaymentDetails,isBank, setIsBank,isMomo,setIsMom
           {isMomo && (
             <form
               action=""
-              className="w-full grid grid-cols-2 gap-x-2 mb-4 items-baseline"
+              className="w-full grid grid-cols-2 sm:grid-cols-1 sm:gap-0 gap-x-2 mb-4 items-baseline"
               onSubmit={handleSubmit(submitForm)}
             >
               <div className="drawer relative mb-2">
