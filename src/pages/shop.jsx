@@ -48,7 +48,7 @@ const Shop = () => {
   }
 
   //data fetching 
-  const url = "/public/data.json";
+  const url = "/data.json";
   const { data, loading, error } = useFetchData(url);
   const trendingData = data?.products?.trending || []; //for trending data
   const newArrivals = data?.products?.newArrivals || []; //for new arrivals data

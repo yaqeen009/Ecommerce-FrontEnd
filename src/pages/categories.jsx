@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-undef */
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,7 +26,7 @@ const Categories = () => {
   const filteredProducts = useSelector((state) => state.filter.filteredProducts)
 
   //data fetching
-  const url = "/public/data.json";
+  const url = "/data.json";
   const { data, loading, error } = useFetchData(url);
   const trendingData = data?.products?.trending || []; //for trending data
 

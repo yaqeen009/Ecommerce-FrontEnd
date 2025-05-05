@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-key */
 import Carousel from "../components/slider";
 import useFetchData from "../hooks/useFetch";
@@ -28,7 +29,7 @@ const Home = () => {
   const dispatch = useDispatch()
   
   //data fetch
-  const url = "/public/data.json"; 
+  const url = "/data.json"; 
   const { data, loading, error } = useFetchData(url);                   //card data fetch 
   const cardData = data?.products?.featured || [];
   
