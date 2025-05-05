@@ -19,7 +19,7 @@ const Cart = () => {
     navigate("/shop");
   };
   return (
-    <div className="cart lg:mx-8 mx-4 lg:my-16 my-8 bg-background h-screen">
+    <div className="cart lg:mx-8 mx-4 lg:my-16 my-8 bg-background h-screen sm:h-full">
       {cart.length > 0 ? (
         <>
           <h1 className="font-montserrat text-mobile-headline md:text-tablet-headline lg:text-headlind">
