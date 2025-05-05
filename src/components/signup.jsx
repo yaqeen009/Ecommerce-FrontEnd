@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../states/authSlice";
 import { useNavigate } from "react-router-dom";
 
+// eslint-disable-next-line react/prop-types
 const SignUp = ({ signedUp, isOpen }) => {
   const navigate = useNavigate();
   //redux connection
@@ -52,13 +53,13 @@ const SignUp = ({ signedUp, isOpen }) => {
     console.log(user);
   };
   return (
-    <div className="sign-up flex justify-center mt-8 bg-background">
+    <div className="sign-up flex justify-center sm:justify-normal sm:mx-4 mt-8 bg-background">
       {isOpen && (
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full">
           <h1 className="font-montserrat lg:text-headlind md:text-tablet-headline text-mobile-headline">
             Sign Up
           </h1>
-          <div className="w-fit h-fit flex flex-col lg:py-16 md:py-12 py-8 px-4 md:px-6 lg:px-8 shadow-2dp rounded-lg bg-background">
+          <div className="w-fit h-fit sm:w-full flex flex-col lg:py-16 md:py-12 py-8 px-4 md:px-6 lg:px-8 shadow-2dp rounded-lg bg-background">
             <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
               <CustomInput
                 inputName={"Enter your username"}
@@ -67,6 +68,7 @@ const SignUp = ({ signedUp, isOpen }) => {
                 errors={errors}
                 validationName={"username"}
                 isRequired={true}
+                checkout={true}
               />
               <CustomInput
                 inputName={"Enter your email"}
@@ -75,6 +77,7 @@ const SignUp = ({ signedUp, isOpen }) => {
                 errors={errors}
                 validationName={"email"}
                 isRequired={true}
+                checkout={true}
               />
               <CustomInput
                 inputName={"Enter your password"}
@@ -83,6 +86,7 @@ const SignUp = ({ signedUp, isOpen }) => {
                 errors={errors}
                 validationName={"password"}
                 isRequired={true}
+                checkout={true}
               />
               <CustomInput
                 inputName={"Confirm your password"}
@@ -91,10 +95,11 @@ const SignUp = ({ signedUp, isOpen }) => {
                 errors={errors}
                 validationName={"confirmPassword"}
                 isRequired={true}
+                checkout={true}
               />
               <button
                 type="submit"
-                className="lg:w-[25vw] md:w-[50vw] w-[70vw] bg-accent text-background py-3 rounded-lg duration-300 ease-in hover:bg-primary font-montserrat"
+                className="lg:w-[25vw] md:w-[50vw] w-full bg-accent text-background py-3 rounded-lg duration-300 ease-in hover:bg-primary font-montserrat"
               >
                 Confirm
               </button>

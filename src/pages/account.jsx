@@ -71,7 +71,7 @@ const Account = () => {
           />
           <form
             onSubmit={handleSubmit(handleUpdate)}
-            className={`px-4 lg:px-8 grid grid-cols-2 w-full gap-x-12 gap-y-2 mt-4}`}
+            className={`px-4 lg:px-8 grid grid-cols-2 sm:grid-cols-1 w-full gap-x-12 gap-y-2 mt-4}`}
           >
             <AccountInput
               type={"text"}
@@ -114,7 +114,7 @@ const Account = () => {
           <DetailHeaders name={"Billing Details"} showEdit={true} handleClick={() =>setBillingUpdater((prev) => !prev)}/>
           <form
             onSubmit={handleSubmit(handleBillingUpdate)}
-            className="px-4 lg:px-8 grid grid-cols-2 w-full gap-x-12 gap-y-2 mt-4 "
+            className="px-4 lg:px-8 grid grid-cols-2 sm:grid-cols-1 w-full gap-x-12 gap-y-2 mt-4 "
           >
             <AccountInput type={"text"} placeholder={user?.billing?.firstName} disabled={!billingUpdater}/>
             <AccountInput type={"text"} placeholder={user?.billing?.lastName} disabled={!billingUpdater}/>
@@ -137,7 +137,7 @@ const Account = () => {
           <DetailHeaders name={"Shipping Details"} showEdit={true} handleClick={() => setShippingUpdater((prev) => !prev)}/>
           <form
             onSubmit={handleSubmit(handleShippingUpdate)}
-            className="px-4 lg:px-8 grid grid-cols-2 w-full gap-x-12 gap-y-2 mt-4 "
+            className="px-4 lg:px-8 grid grid-cols-2 sm:grid-cols-1 w-full gap-x-12 gap-y-2 mt-4 "
           >
             <AccountInput type={"text"} placeholder={user?.shipping?.firstName} disabled={!shippingUpdater}/>
             <AccountInput type={"text"} placeholder={user?.shipping?.lastName} disabled={!shippingUpdater}/>
@@ -158,8 +158,8 @@ const Account = () => {
         </div>
         <div className="mb-4 flex flex-col">
           <DetailHeaders name={"Order History"} showEdit={false} />
-          <div className="pt-5 grid grid-cols-5  bg-[#F0F5FD20] text-center">
-            <p className="font-open_sans text-secondary text-mobile-body md:text-tablet-body lg:text-body">
+          <div className="pt-5 grid grid-cols-5 sm:grid-cols-4 sm:gap-1  bg-[#F0F5FD20] text-center">
+            <p className="sm:hidden font-open_sans text-secondary text-mobile-body md:text-tablet-body lg:text-body">
               Order ID
             </p>
             <p className="font-open_sans text-secondary text-mobile-body md:text-tablet-body lg:text-body">

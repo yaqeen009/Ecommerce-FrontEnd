@@ -34,7 +34,7 @@ const SignIn = ({ signedIn, isopen }) => {
   return (
     <div className="sign-in flex justify-center mt-8 bg-background">
       {isopen && (
-        <div className="flex flex-col my-[10vh]">
+        <div className="flex flex-col my-[10vh] sm:w-full sm:mx-4">
           {error ? (
             <h1 className="font-montserrat lg:text-title md:text-tablet-title text-mobile-title text-danger-100">
               {error}
@@ -44,7 +44,7 @@ const SignIn = ({ signedIn, isopen }) => {
               Sign In
             </h1>
           )}
-          <div className="w-fit h-fit flex flex-col lg:py-16 md:py-12 py-8 px-4 md:px-6 lg:px-8 shadow-2dp rounded-lg bg-background">
+          <div className="w-fit h-fit sm:w-full flex flex-col lg:py-16 md:py-12 py-8 px-4 md:px-6 lg:px-8 shadow-2dp rounded-lg bg-background">
             <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
               <CustomInput
                 inputName={"Enter Username"}
@@ -53,6 +53,7 @@ const SignIn = ({ signedIn, isopen }) => {
                 errors={errors}
                 validationName={"username"}
                 isRequired={true}
+                checkout={true}
               />
               <CustomInput
                 inputName={"Enter Password"}
@@ -61,8 +62,9 @@ const SignIn = ({ signedIn, isopen }) => {
                 errors={errors}
                 validationName={"password"}
                 isRequired={true}
+                checkout={true}
               />
-              <button className="lg:w-[25vw] md:w-[50vw] w-[70vw] bg-accent text-background py-3 rounded-lg duration-300 ease-in hover:bg-primary font-montserrat">
+              <button className="lg:w-[25vw] md:w-[50vw] w-full bg-accent text-background py-3 rounded-lg duration-300 ease-in hover:bg-primary font-montserrat">
                 Confirm
               </button>
             </form>
