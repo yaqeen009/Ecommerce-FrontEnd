@@ -55,7 +55,7 @@ const CartItem = ({
           <img
             src={image}
             alt="prod-img"
-            className="object-cover rounded-xl w-64 h-64"
+            className={`object-cover rounded-xl w-64 h-64 ${isCheckOut && `md:h-32`}`}
           />
         </div>
         <div className="flex flex-col basis-1/2 justify-between">

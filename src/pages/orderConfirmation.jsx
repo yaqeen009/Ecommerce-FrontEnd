@@ -28,7 +28,7 @@ const Confirmation = () => {
   //utils
   //objects
   return (
-    <div className="oder-confirmation mx-8">
+    <div className="oder-confirmation mx-8 sm:mx-4">
       <div className="flex flex-row justify-between  items-center">
         <img src={logo} alt="logo" className="mb-4 w-fit h-fit" />
         <img
@@ -38,17 +38,30 @@ const Confirmation = () => {
           onClick={goToCart}
         />
       </div>
-      <div className="flex flex-row mb-8">
-        <div className="basis-3/5">
-          <span className="">
+      <div className="flex flex-row sm:flex-col mb-8">
+        <div className="flex flex-col basis-3/5">
+        <span className="mb-4 sm:hidden md:scale-[0.8] md:relative md:-ml-8">
+          <Process
+            color1={"bg-success-200"}
+            color2={"bg-primary"}
+            styleCol1={"#91CAFF"}
+            styleCol2={"#003366"}
+            isBar1={false}
+            isBar2={true}
+            isBar3={false}
+            bgcol={"#FEFEFE"}
+          />
+        </span>
+          <span className="mb-4 sm:block hidden sm:scale-[0.7] self-center mr-8">
             <Process
               color1={"bg-success-200"}
-              color2={"bg-primary"}
+              color2={"bg-success-400"}
               styleCol1={"#91CAFF"}
-              styleCol2={"#003366"}
+              styleCol2={"#627F9A"}
               isBar1={false}
-              isBar2={false}
-              isBar3={true}
+              isBar2={true}
+              isBar3={false}
+              bgcol={"#FEFEFE"}
             />
           </span>
           <div className="flex flex-col space-y-4 mt-6">
@@ -228,7 +241,7 @@ const Confirmation = () => {
           </div>
         </div>
       </div>
-      <footer className="flex flex-row justify-between items-center mt-16 mb-4">
+      <footer className="flex flex-row sm:flex-col sm:items-start sm:space-y-4 justify-between items-center mt-16 mb-4">
         <p className="font-open_sans text-font text-mobile-label md:text-tablet-label lg:text-label">
           You can contact our{" "}
           <span onClick={goToSupport} className="text-accent cursor-pointer">
@@ -250,13 +263,3 @@ const Confirmation = () => {
 };
 
 export default Confirmation;
-
-{
-  /* <CartSummary
-subtotal={totalPrice.toFixed(2)}
-delivery={5.0.toFixed(2)}
-tax={7.49.toFixed(2)}
-promo={10.00.toFixed(2)}
-orderTotal={Math.floor(totalPrice + 5.0 + 7.49 - 10.0).toFixed(2)}
-/> */
-}

@@ -56,12 +56,12 @@ const Checkout = () => {
   //objects
   //utils
   return (
-    <div className="checkout flex flex-row h-screen">
-      <div className="flex flex-col pl-4 mt-4 basis-3/5 w-3/5 h-full fixed overflow-y-auto bg-background pb-4">
-        <span className="w-fit h-fit">
+    <div className="checkout flex sm:flex-col-reverse flex-row h-screen sm:h-full">
+      <div className="flex flex-col pl-4 mt-4 sm:basis-1/2 sm:relative sm:w-full basis-3/5 w-3/5 h-full fixed overflow-y-auto bg-background pb-4">
+        <span className="w-fit h-fit sm:hidden">
           <img src={logo} alt="logo" className="mb-4 w-fit h-fit" />
         </span>
-        <span className="mb-4">
+        <span className="mb-4 sm:hidden md:scale-[0.8] md:relative -left-4">
           <Process
             color1={"bg-success-200"}
             color2={"bg-primary"}
@@ -70,6 +70,7 @@ const Checkout = () => {
             isBar1={false}
             isBar2={true}
             isBar3={false}
+            bgcol={"#FEFEFE"}
           />
         </span>
         <section className="payment mr-4">
@@ -106,18 +107,32 @@ const Checkout = () => {
             btnName={"Pay now"}
             btnColor={"bg-accent hover:bg-primary"}
             btnTextColor={"text-background "}
-            btnTextSize={"mx-[45%] py-2"}
+            btnTextSize={"mx-[42%] lg:mx-[45%] py-2"}
             btnFunction={submitForm}
           />
         </span>
       </div>
       <div className="flex flex-col basis-2/5 bg-primary ml-auto h-full overflow-y-auto">
-        <span
-          onClick={goToCart}
-          className="flex self-end mr-4 mt-4 cursor-pointer"
-        >
-          <img src={bag} alt="" />
-        </span>
+        <div className="flex flex-col-reverse  w-screen">
+          <span className="mb-4 sm:block hidden sm:scale-[0.7] self-center mr-8">
+            <Process
+              color1={"bg-success-200"}
+              color2={"bg-success-400"}
+              styleCol1={"#91CAFF"}
+              styleCol2={"#627F9A"}
+              isBar1={false}
+              isBar2={true}
+              isBar3={false}
+              bgcol={"#003366"}
+            />
+          </span>
+          <span
+            onClick={goToCart}
+            className="flex self-end mr-4 mt-4 cursor-pointer"
+          >
+            <img src={bag} alt="" />
+          </span>
+        </div>
         <div className="from-cart m-8">
           <p className="font-open_sans text-background text-mobile-label md:text-tablet-label lg:text-label">
             Ammount Due

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-const ProcessBarComp = ({ color,color2, name }) => {
+const ProcessBarComp = ({ color,color2, name,bgcol }) => {
   return (
     <div className="relative flex flex-col items-center justify-center w-full">
       <div className="flex flex-row items-center justify-center relative">
@@ -10,7 +10,7 @@ const ProcessBarComp = ({ color,color2, name }) => {
             height: "52px",
             aspectRatio: "cos(30deg)",
             clipPath: "polygon(0 0,100% 50%,0 100%)",
-            background: "#FEFEFE",
+            background: `${bgcol}`,
           }}
         ></span>
         <p className="absolute pl-10 font-open_sans text-success-500 z-20">{name}</p>
