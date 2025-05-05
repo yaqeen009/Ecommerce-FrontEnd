@@ -59,7 +59,7 @@ const NavBar = () => {
     setIsExpanded(!isExpanded);
   };
   //data fetching
-  const url = "/public/data.json";
+  const url = "/data.json";
   const { data, loading, error } = useFetchData(url);
   const newArrivals = data?.products?.newArrivals || []; //for new arrivals data
 
@@ -123,9 +123,9 @@ const NavBar = () => {
             </Link>
             <Link to={"/cart"}>
               {cart.length > 0 ? (
-                <img src={cartEmpty} className="w-4 h-4" />
-              ) : (
                 <img src={cartFilled} className="w-4 h-4" />
+              ) : (
+                <img src={cartEmpty} className="w-4 h-4" />
               )}
             </Link>
           </div>
