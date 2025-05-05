@@ -152,7 +152,7 @@ const Payment = ({submitForm,setPaymentDetails,isBank, setIsBank,isMomo,setIsMom
         </div>
       </div>
       <div className="momo-payment">
-        <span className="my-4 flex justify-between">
+        <span className="my-4 flex sm:flex-col justify-between">
           <p>Mobile Money</p>
           <button onClick={handleExpandMomo}>
             {isMomo ? (
